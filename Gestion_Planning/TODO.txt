@@ -1,0 +1,2 @@
+- Créer le MCD sur JMerise
+- Générer le schéma logique et physique, puis le code SQL
