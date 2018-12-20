@@ -3,6 +3,7 @@ package interfaceG;
 import java.util.ArrayList;
 
 public class Planning {
+	
 	private ArrayList<Cours> liste_cours;
 	
 	public Planning() {

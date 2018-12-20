@@ -30,7 +30,7 @@ public class FenetrePlanning extends JFrame {
 	private void build()
 	{
 		setTitle("Planning");
-		setSize(500, 500);
+		setSize(1000, 1000);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -39,11 +39,11 @@ public class FenetrePlanning extends JFrame {
 	
 	private JPanel buildContentPane()
 	{
-		JPanel panel = new JPanel();
+		/*JPanel panel = new JPanel();
 		panel.setLayout(new GridBagLayout());
-		panel.setBackground(Color.white);
+		panel.setBackground(Color.white);*/
 
-	    
+	    PlanningPanel panel = new PlanningPanel();
 		
 		return panel;
 	}
