@@ -19,6 +19,8 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
+import gp.utilisateur.Utilisateur;
+
 public class FenetrePlanning extends JFrame {
 	
 	public FenetrePlanning()
@@ -30,8 +32,8 @@ public class FenetrePlanning extends JFrame {
 	private void build()
 	{
 		setTitle("Planning");
-		setSize(1000, 1000);
-		setResizable(false);
+		setSize(700, 400);
+		setResizable(true);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setContentPane(buildContentPane());
@@ -43,7 +45,7 @@ public class FenetrePlanning extends JFrame {
 		panel.setLayout(new GridBagLayout());
 		panel.setBackground(Color.white);*/
 
-	    PlanningPanel panel = new PlanningPanel();
+	    PlanningPanel panel = new PlanningPanel(new Utilisateur());
 		
 		return panel;
 	}

@@ -8,7 +8,7 @@ class MysqlCon{
 			
 			Class.forName("com.mysql.jdbc.Driver");  
 		  
-		Connection con  = DriverManager.getConnection("jdbc:mysql://localhost:8889/projetbdd","root","root");  
+		Connection con  = DriverManager.getConnection("jdbc:mysql://localhost:3308/bdd","root","root");  
 		 System.out.println("ok");
 		con.close();
 		
