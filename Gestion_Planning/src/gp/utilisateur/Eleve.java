@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
-import main.MySqlProvider;
 import gp.cours.Cours;
 import gp.db.IEleve;
 
@@ -66,7 +65,7 @@ public class Eleve extends Utilisateur implements IEleve {
 	
 	
 	public void getEleve() {
-		Connection connexion = null;
+/*		Connection connexion = null;
 		try {
 			connexion = MySqlProvider.getInstance().getConnexion();
 			String query = "SELECT * FROM users";
@@ -93,7 +92,7 @@ public class Eleve extends Utilisateur implements IEleve {
 	            } catch (SQLException ignore) {
 	            }				
 			}
-	    }
+	    }*/
 	}
 	
 	public Long getGroupbyEleve(){
