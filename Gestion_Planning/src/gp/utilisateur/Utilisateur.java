@@ -2,6 +2,7 @@ package gp.utilisateur;
 
 import java.util.ArrayList;
 import java.util.Date;
+import gp.cours.*;
 
 // protected ?
 public class Utilisateur {
@@ -29,6 +30,8 @@ public class Utilisateur {
 	protected String numMobile = null;
 	protected String email = null;
 	
+	Long idGroupe = 0L;
+	
 	public Long getMatricule() {
     	return this.matricule;
     }
@@ -41,7 +44,27 @@ public class Utilisateur {
 		int status = 0;
 		// status = statement.executeUpdate(value);
 		return status;
+    
 	}
+    
+    public ArrayList<Cours> getCoursByIdSemaine(int idSemaine)
+    {
+    	String str = "SELECT * FROM COURS WHERE numSemaine = " + idSemaine
+				+ " AND idGroupe = " + this.idGroupe + ";";
+		// ResultSet resultat = statement.executeQuery(str);
+
+		// traiter la liste de r�sultat
+		ArrayList<Cours> listCours = new ArrayList<Cours>();
+		/*
+		 * while(resultat.next()){ Long id = resultat.getLong(); Date debut =
+		 * resultat.getDate(); Date fin = resultat.getDate(); Long idSalle =
+		 * resultat.getLong(); Long matricule = resultat.getLong(); Long
+		 * idGroupe = resultat.getLong(); int numSemaine = resultat.getString();
+		 * Cours cours = new Cours(id, debut, fin, idSalle, matricule, idGroupe,
+		 * numSemaine); listContact.add(contact); }
+		 */
+		return listCours;
+    }
 
 }
 

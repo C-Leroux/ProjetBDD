@@ -17,5 +17,6 @@ public interface ICours {
 	public ArrayList<Cours> getCoursbyIdSemaine(int idSemaine, Long idGroupe);
 	public int getJour(); // renvoie un int correspondant au jour de la semaine (Lundi = 0, Mardi = 1, ...)
 	public String getHeure();
+	public String getNom();
 
 }

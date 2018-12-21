@@ -59,7 +59,6 @@ public class PlanningPanel extends JPanel {
 	public void creerCours() {
 		Calendar calendar = new GregorianCalendar();
 		ArrayList<Cours> cours = utilisateur.getCoursByIdSemaine(calendar.getWeekYear());
-		
 		for (Cours c : cours)
 			ajoutCours(c);
 	}

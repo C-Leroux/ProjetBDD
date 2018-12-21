@@ -9,12 +9,13 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import main.MySqlProvider;
+import gp.cours.Cours;
 import gp.db.IEleve;
 
 
 public class Eleve extends Utilisateur implements IEleve {
 	
-	Long idGroupe = 0L;
+	//Long idGroupe = 0L;
 	private ArrayList<Contact> contacts = new ArrayList<Contact>();
 	
     public Eleve(String nom, String prenom, String login, Date dateNaissance, String paysNaissance, String etablissementPrecedent
@@ -84,7 +85,7 @@ public class Eleve extends Utilisateur implements IEleve {
 			st.close();
 
 		} catch (SQLException e) {
-			System.out.println("Erreur de connexion a la base de donnŽe nooob. " + e.getMessage());
+			System.out.println("Erreur de connexion a la base de donnï¿½e nooob. " + e.getMessage());
 	    } finally {
 			if (connexion != null) {
 	            try {
@@ -98,4 +99,23 @@ public class Eleve extends Utilisateur implements IEleve {
 	public Long getGroupbyEleve(){
 		return this.idGroupe; 
 	}
+	
+	public ArrayList<Cours> getCoursByIdSemaine(int idSemaine)
+    {
+    	String str = "SELECT * FROM COURS WHERE numSemaine = " + idSemaine
+				+ " AND idGroupe = " + this.idGroupe + ";";
+		// ResultSet resultat = statement.executeQuery(str);
+
+		// traiter la liste de rï¿½sultat
+		ArrayList<Cours> listCours = new ArrayList<Cours>();
+		/*
+		 * while(resultat.next()){ Long id = resultat.getLong(); Date debut =
+		 * resultat.getDate(); Date fin = resultat.getDate(); Long idSalle =
+		 * resultat.getLong(); Long matricule = resultat.getLong(); Long
+		 * idGroupe = resultat.getLong(); int numSemaine = resultat.getString();
+		 * Cours cours = new Cours(id, debut, fin, idSalle, matricule, idGroupe,
+		 * numSemaine); listContact.add(contact); }
+		 */
+		return listCours;
+    }
 }

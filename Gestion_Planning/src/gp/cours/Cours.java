@@ -12,6 +12,7 @@ import gp.utilisateur.Contact;
 
 public class Cours {
 	private Long id = 0L;
+	private String nom = "";
 	private Date dateDebut = null;
 	private Date dateFin = null;
 	private Long idSalle = 0L;
@@ -20,8 +21,9 @@ public class Cours {
 	private int nbPlaceSalle = 0;
 	private int numSemaine = 0;
 
-	public Cours(Date debut, Date fin, Long idsalle, Long matricule,
+	public Cours(String nom, Date debut, Date fin, Long idsalle, Long matricule,
 			Long idGroupe, int numSemaine) {
+		this.nom = nom;
 		this.dateDebut = debut;
 		this.dateFin = fin;
 		this.idSalle = idsalle;
@@ -30,12 +32,12 @@ public class Cours {
 		this.nbPlaceSalle = getNbPlacesSalle();
 	}
 
-	public Cours creerCours(Date debut, Date fin, Long idsalle, Long matricule,
+	public Cours creerCours(String nom, Date debut, Date fin, Long idsalle, Long matricule,
 			Long idGroupe, int numSemaine) {
-		Cours cours = new Cours(debut, fin, idsalle, matricule, idGroupe,
+		Cours cours = new Cours(nom, debut, fin, idsalle, matricule, idGroupe,
 				numSemaine);
 		String value = "INSERT INTO RESPONSABLE VALUES( '"
-				+ cours.getId().toString() + "','" + debut + "','" + fin
+				+ cours.getId().toString()+ "','" + nom + "','" + debut + "','" + fin
 				+ "','" + idsalle + "','" + matricule + cours.getNumSemaine()
 				+ "');";
 		int status = 0;
@@ -66,9 +68,9 @@ public class Cours {
 	}
 
 	// si le cours existe deja
-	// selectionne le cours avec une date de dŽbut Žgale
+	// selectionne le cours avec une date de dï¿½but ï¿½gale
 	public boolean getCoursbyDateDebut(Date date, Long idGroupe) {
-		// selectionne le cours avec une date de dŽbut Žgale
+		// selectionne le cours avec une date de dï¿½but ï¿½gale
 		String str = "SELECT * FROM SALLE WHERE dateDebut = " + date
 				+ " AND idGroupe = " + idGroupe + ";";
 		// ResultSet resultat = statement.executeQuery(str);
@@ -109,7 +111,7 @@ public class Cours {
 				+ " AND idGroupe = " + idGroupe + ";";
 		// ResultSet resultat = statement.executeQuery(str);
 
-		// traite la liste de rŽsultat
+		// traite la liste de rï¿½sultat
 		ArrayList<Cours> listCours = new ArrayList<Cours>();
 		/*
 		 * while(resultat.next()){ Long id = resultat.getLong(); Date debut =
@@ -127,7 +129,7 @@ public class Cours {
 				+ " AND idGroupe = " + idGroupe + ";";
 		// ResultSet resultat = statement.executeQuery(str);
 
-		// traiter la liste de rŽsultat
+		// traiter la liste de rï¿½sultat
 		ArrayList<Cours> listCours = new ArrayList<Cours>();
 		/*
 		 * while(resultat.next()){ Long id = resultat.getLong(); Date debut =
@@ -166,6 +168,10 @@ public class Cours {
 	public String getHeure() {
 		DateFormat df = new SimpleDateFormat("HH:mm");
 		return df.format(dateDebut) + " - " + df.format(dateFin);
+	}
+	
+	public String getNom() {
+		return this.nom;
 	}
 
 }
