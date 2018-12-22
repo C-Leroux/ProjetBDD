@@ -34,6 +34,7 @@ public class Utilisateur {
 	protected String email = null;
 	
 	Long idGroupe = 0L;
+
 	
 	public Long getMatricule() {
     	return this.matricule;
@@ -52,7 +53,6 @@ public class Utilisateur {
     
     public ArrayList<Cours> getCoursByIdSemaine(int idSemaine) throws SQLException
     {
-    	System.out.println("CoUOU");
     	String str = "SELECT * FROM COURS WHERE numSemaine = " + idSemaine
 				+ " AND idGroupe = " + this.idGroupe + ";";
     	DbConnexion db;

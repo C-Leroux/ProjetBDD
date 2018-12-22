@@ -39,8 +39,15 @@ public class Eleve extends Utilisateur implements IEleve {
     	this.photo = photo;
     	this.idGroupe = idGroupe;
     }
-    
 	
+	public Eleve(Long matricule, String login, String mdp, Long idGroupe) {
+		this.login = login;
+    	this.mdp = mdp;
+    	this.role = Role.ETUDIANT;
+    	this.idGroupe = idGroupe;
+    	this.matricule = matricule;
+	}
+
 	public static Eleve creerEleve(String nom, String prenom, String login, Date dateNaissance, String paysNaissance, String etablissementPrecedent
     		, Date inscriptionDate, char sex, String villeNaissance, String numMaison, String numMobile, String photo, Long idGroupe, String mdp, String email) throws ClassNotFoundException {
 		Eleve eleve = new Eleve(nom, prenom, login, dateNaissance, paysNaissance, etablissementPrecedent
@@ -126,4 +133,6 @@ public class Eleve extends Utilisateur implements IEleve {
 		 */
 		//return listCours;
     //}
+	
+	
 }

@@ -21,6 +21,14 @@ public class Administrateur extends Utilisateur implements IAdministrateur {
     	this.codePostal = codePostal;
     	this.ville = ville;
     }
+	
+	public Administrateur(Long matricule, String login, String mdp) {
+		this.login = login;
+    	this.mdp = mdp;
+    	this.role = Role.ADMINISTRATEUR;
+    	this.matricule = matricule;
+	}
+	
 	public static Administrateur creerAdministrateur(String nom, String prenom, String login
     		, String numMaison, String numMobile, String mdp, String email, String rue, String codePostal, String ville) {
 		Administrateur admin = new Administrateur(nom, prenom, login, numMaison, numMobile, mdp, email, rue, codePostal, ville);

@@ -23,6 +23,12 @@ public class Professeur extends Utilisateur implements IProfesseur {
     	this.codePostal = codePostal;
     	this.ville = ville;
     }
+	public Professeur(Long matricule, String login, String mdp) {
+		this.login = login;
+    	this.mdp = mdp;
+    	this.role = Role.PROFESSEUR;
+    	this.matricule = matricule;
+	}
 	
 	public static Professeur creerProfesseur(String nom, String prenom, String login
     		, String numMaison, String numMobile, String mdp, String email, String rue, String codePostal, String ville) {

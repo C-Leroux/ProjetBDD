@@ -5,6 +5,10 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -13,6 +17,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import gp.cours.Cours;
+import gp.utilisateur.Administrateur;
+import gp.utilisateur.Eleve;
+import gp.utilisateur.Professeur;
+import gp.utilisateur.Role;
+import gp.utilisateur.Utilisateur;
+import main.DbConnexion;
 
 public class FenetreLog extends JFrame implements ActionListener{
 		 
@@ -82,4 +94,38 @@ public class FenetreLog extends JFrame implements ActionListener{
 		planning.setVisible(true);
 	}
 	
+	
+	private Utilisateur getLoginMdp(String login, String mdp) throws SQLException {
+		String str = "SELECT * FROM UTLISATEUR WHERE login = " + login
+				+ " AND mdp = " + mdp + ";";
+		DbConnexion db;
+		try {
+			db = new DbConnexion(str);
+			ResultSet resultat = db.executerRequete();
+			Long matricule = resultat.getLong("matricule");
+			Long idGroupe = resultat.getLong("idGroupe");
+			Role role = Role.valueOf(resultat.getString("role"));
+	
+			Utilisateur utilisateur;
+			if(role == Role.ETUDIANT)
+			{
+				utilisateur = new Eleve(matricule,login,mdp,idGroupe);
+			}
+			if(role == Role.PROFESSEUR) {
+				utilisateur = new Professeur(matricule,login,mdp);
+			}
+			else {
+
+				utilisateur = new Administrateur(matricule, login, mdp);
+				
+			}
+			return utilisateur;
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+		
+	}
 }
