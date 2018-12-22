@@ -65,6 +65,7 @@ public class Eleve extends Utilisateur implements IEleve {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		return null;
 	}
 	
@@ -107,7 +108,7 @@ public class Eleve extends Utilisateur implements IEleve {
 		return this.idGroupe; 
 	}
 	
-	public ArrayList<Cours> getCoursByIdSemaine(int idSemaine)
+	/*public ArrayList<Cours> getCoursByIdSemaine(int idSemaine)
     {
     	String str = "SELECT * FROM COURS WHERE numSemaine = " + idSemaine
 				+ " AND idGroupe = " + this.idGroupe + ";";
@@ -123,6 +124,6 @@ public class Eleve extends Utilisateur implements IEleve {
 		 * Cours cours = new Cours(id, debut, fin, idSalle, matricule, idGroupe,
 		 * numSemaine); listContact.add(contact); }
 		 */
-		return listCours;
-    }
+		//return listCours;
+    //}
 }

@@ -24,7 +24,7 @@ public class FenetreLog extends JFrame implements ActionListener{
 	
 	private void build () {
 		// gestion fenetre 
-		setTitle("Mediatheque"); //On donne un titre a l'application
+		setTitle("Gestion Planning"); //On donne un titre a l'application
 		 setSize(320,240); //On donne une taille a notre fenetre
 		 setLocationRelativeTo(null); //On centre la fenetre sur l'ecran
 		 setResizable(false); //On interdit la redimensionnement de la fenetre
@@ -71,6 +71,7 @@ public class FenetreLog extends JFrame implements ActionListener{
 		panel.add(pan2);
 		panel.add(pan3);
 		panel.add(pan4);
+	
 		return panel;
 	}
 

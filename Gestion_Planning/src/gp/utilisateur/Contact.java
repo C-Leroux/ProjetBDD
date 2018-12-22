@@ -22,7 +22,6 @@ public class Contact implements IContact {
 		this.telephone = telephone;
 		this.email = email;
 		this.matricule = matricule;
-		this.id++;
 	}
 	
 	public static Contact creeContact(String nom, String prenom, String adresse, String telephone, String email, Long matricule) {
@@ -47,7 +46,6 @@ public class Contact implements IContact {
 		return null;
 
 	}
-	public void sauvegarderContact() {}
 	
 	public void supprimerContact() {
 		

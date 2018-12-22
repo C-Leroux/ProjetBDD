@@ -1,8 +1,11 @@
 package gp.utilisateur;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import gp.cours.*;
+import main.DbConnexion;
 
 // protected ?
 public class Utilisateur {
@@ -47,23 +50,38 @@ public class Utilisateur {
     
 	}
     
-    public ArrayList<Cours> getCoursByIdSemaine(int idSemaine)
+    public ArrayList<Cours> getCoursByIdSemaine(int idSemaine) throws SQLException
     {
+    	System.out.println("CoUOU");
     	String str = "SELECT * FROM COURS WHERE numSemaine = " + idSemaine
 				+ " AND idGroupe = " + this.idGroupe + ";";
-		// ResultSet resultat = statement.executeQuery(str);
+    	DbConnexion db;
+		try {
+			db = new DbConnexion(str);
+			ResultSet resultat = db.executerRequete();
+			// traite la liste de resultat
+			ArrayList<Cours> listCours = new ArrayList<Cours>();
+			  while(resultat.next()){ 
+				  Long id = resultat.getLong("idCours");
+				  String nom = resultat.getString("nom");
+				  Date debut = resultat.getDate("datedebut"); 
+				  Date fin = resultat.getDate("datefin"); 
+				  Long idSalle = resultat.getLong("idSalle"); 
+				  Long matricule = resultat.getLong("matricule"); 
+				  Long idGroupe = resultat.getLong("idGroupe"); 
+				  int numSemaine = resultat.getInt("numSemaine");
+			      Cours cours = new Cours(nom, debut, fin, idSalle, matricule, idGroupe, numSemaine); 
+			      listCours.add(cours); 
+			  }
+			 
+			return listCours;
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
 
-		// traiter la liste de r�sultat
-		ArrayList<Cours> listCours = new ArrayList<Cours>();
-		/*
-		 * while(resultat.next()){ Long id = resultat.getLong(); Date debut =
-		 * resultat.getDate(); Date fin = resultat.getDate(); Long idSalle =
-		 * resultat.getLong(); Long matricule = resultat.getLong(); Long
-		 * idGroupe = resultat.getLong(); int numSemaine = resultat.getString();
-		 * Cours cours = new Cours(id, debut, fin, idSalle, matricule, idGroupe,
-		 * numSemaine); listContact.add(contact); }
-		 */
-		return listCours;
+		
     }
 
 }

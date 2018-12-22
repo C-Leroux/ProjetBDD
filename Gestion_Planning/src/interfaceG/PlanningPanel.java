@@ -3,6 +3,7 @@ package interfaceG;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -58,9 +59,16 @@ public class PlanningPanel extends JPanel {
 	
 	public void creerCours() {
 		Calendar calendar = new GregorianCalendar();
-		ArrayList<Cours> cours = utilisateur.getCoursByIdSemaine(calendar.getWeekYear());
-		for (Cours c : cours)
-			ajoutCours(c);
+		ArrayList<Cours> cours;
+		try {
+			cours = utilisateur.getCoursByIdSemaine(calendar.getWeekYear());
+			for (Cours c : cours)
+				ajoutCours(c);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public void ajoutCours(Cours c) {

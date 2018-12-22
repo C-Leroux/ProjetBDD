@@ -9,7 +9,6 @@ public class Administrateur extends Utilisateur implements IAdministrateur {
 	public Administrateur (String nom, String prenom, String login
     		, String numMaison, String numMobile, String mdp, String email, String rue, String codePostal, String ville)
     {
-    	this.matricule++;
     	this.nom = nom;
     	this.prenom = prenom;
     	this.login = login;
@@ -48,8 +47,5 @@ public class Administrateur extends Utilisateur implements IAdministrateur {
 		}
 		return null;
 	}
-	public void sauvegarderAdministrateur() {}
-	
-	public void getEdminiastrateur() {}
 
 }

@@ -60,13 +60,17 @@ public class Cours {
 		return null;
 	}
 
-	public int supprimerCours(Long id) {
-		String value = "DELETE FROM COURS WHERE idCours = " + id.toString()
-				+ ";";
-		int status = 0;
-		// status = statement.executeUpdate(value);
-		return status;
-
+	public static int supprimerCours(Long id) {
+		String value = "DELETE FROM COURS WHERE idCours = " + id.toString() + ";";
+		DbConnexion db;
+		try {
+			db = new DbConnexion(value);
+			return db.executerInsert();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
 	public Date getDateDebut() {
@@ -78,11 +82,11 @@ public class Cours {
 	}
 
 	// si le cours existe deja
-	// selectionne le cours avec une date de d�but �gale
+	// selectionne le cours avec une date de debut egale
 	public boolean getCoursbyDateDebut(Date date, Long idGroupe) {
-		// selectionne le cours avec une date de d�but �gale
+		// selectionne le cours avec une date de debut egale
 		String str = "SELECT * FROM SALLE WHERE dateDebut = " + date
-				+ " AND idGroupe = " + idGroupe + ";";
+				+ " AND idGroupe = " + idGroupe.toString() + ";";
 		// ResultSet resultat = statement.executeQuery(str);
 		Cours cours;
 		Long idCours = -1L;

@@ -3,6 +3,7 @@ package main;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import gp.cours.Cours;
@@ -47,6 +48,17 @@ public class Main {
 			
 			Contact contact = Contact.creeContact("resp","resp", "adresse", "0698844194", "resp@resp.fr", 1L);
 			
+			
+			//Cours.supprimerCours(2L);
+			  System.out.println("------------------");
+		      ArrayList<Cours> listcours = eleve.getCoursByIdSemaine(1);
+		      System.out.println(listcours.size());
+		      for(int i = 0; i < listcours.size(); i++) {
+		    	  System.out.println(listcours.get(i).getNom());
+		      }
+		      System.out.println("------------------");
+		      
+		      
 			DbConnexion db = new DbConnexion("SELECT * FROM utilisateur;");
 			ResultSet rs = db.executerRequete();
 			while (rs.next()) {

@@ -9,7 +9,7 @@ import gp.utilisateur.Eleve;
 public interface IEleve {
 	
 	public void getEleve();
-	public ArrayList<Cours> getCoursByIdSemaine(int idSemaine);
+	//public ArrayList<Cours> getCoursByIdSemaine(int idSemaine);
 	
 
 }
