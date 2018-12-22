@@ -3,6 +3,7 @@ package gp.utilisateur;
 import java.util.ArrayList;
 
 import gp.db.IContact;
+import main.DbConnexion;
 
 public class Contact implements IContact {
 	private static Long id = 0L;
@@ -24,20 +25,26 @@ public class Contact implements IContact {
 		this.id++;
 	}
 	
-	public Contact creeContact(String nom, String prenom, String adresse, String telephone, String email, Long matricule) {
+	public static Contact creeContact(String nom, String prenom, String adresse, String telephone, String email, Long matricule) {
 		Contact contact = new Contact(nom, prenom, adresse, telephone, email, matricule);
-		Long id = contact.getId();
-		String value = "INSERT INTO RESPONSABLE VALUES( '"+ id + "','" + nom + "','" + prenom + "','" + adresse + "','" + telephone + "','" + email + "','" + matricule + "');";
-		int status = 0;
-		// status = statement.executeUpdate(value);
-		if(status == 0)
-		{
-			// msg d'erreur l'element n'a pas pu etre inserer dans a base 
-			return null;
+		String value = "INSERT INTO RESPONSABLE (nomResp, prenomResp, adresseResp, telResp, emailResp, matricule) VALUES( '" + nom + "','" + prenom + "','" + adresse + "','" + telephone + "','" + email + "','" + matricule + "');";
+		DbConnexion db;
+		try {
+			db = new DbConnexion(value);
+			int status = db.executerInsert();
+			if(status == 0)
+			{
+				System.out.println("Le responsable n'a pas pu etre rentre dans la base de donnee.");
+				return null;
+			}
+			else {
+				return contact;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		else{
-			return contact;
-		}
+		return null;
 
 	}
 	public void sauvegarderContact() {}

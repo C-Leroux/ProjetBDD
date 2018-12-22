@@ -1,6 +1,7 @@
 package gp.salles;
 
 import gp.db.ISalle;
+import main.DbConnexion;
 
 public class Salle implements ISalle {
 	private Long code = 0L;
@@ -15,21 +16,26 @@ public class Salle implements ISalle {
 		this.type = type;
 	}
 	
-	public Salle creerSalle(String nom, int nbPlaces, RoomType type) {
+	public static Salle creerSalle(String nom, int nbPlaces, RoomType type) {
 		Salle salle = new Salle(nom, nbPlaces, type);
-		Long code = salle.getCode();
-		String value = "INSERT INTO RESPONSABLE VALUES( '"+ code.toString() + "','" + nom + "','" + nbPlaces + "','" + type.toString() + "');";
-		int status = 0;
-		// status = statement.executeUpdate(value);
-		if(status == 0)
-		{
-			// msg d'erreur l'element n'a pas pu etre inserer dans a base 
-			return null;
+		String value = "INSERT INTO SALLE (nom, nbPlaces, typeSalle) VALUES( '" + nom + "','" + nbPlaces + "','" + type.toString() + "');";
+		DbConnexion db;
+		try {
+			db = new DbConnexion(value);
+			int status = db.executerInsert();
+			if(status == 0)
+			{
+				System.out.println("L'utilisateur n'a pas pu etre rentre dans la base de donnee.");
+				return null;
+			}
+			else {
+				return salle;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		else{
-			return salle;
-		}
-		
+		return null;
 	}
 	public void sauvegarderSalle() {}
 	public int supprimerSalle(Long code) {

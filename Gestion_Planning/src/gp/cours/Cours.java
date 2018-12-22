@@ -9,6 +9,7 @@ import java.util.GregorianCalendar;
 
 import gp.db.ICours;
 import gp.utilisateur.Contact;
+import main.DbConnexion;
 
 public class Cours {
 	private Long id = 0L;
@@ -32,22 +33,31 @@ public class Cours {
 		this.nbPlaceSalle = getNbPlacesSalle();
 	}
 
-	public Cours creerCours(String nom, Date debut, Date fin, Long idsalle, Long matricule,
+	public static Cours creerCours(String nom, Date debut, Date fin, Long idsalle, Long matricule,
 			Long idGroupe, int numSemaine) {
 		Cours cours = new Cours(nom, debut, fin, idsalle, matricule, idGroupe,
 				numSemaine);
-		String value = "INSERT INTO RESPONSABLE VALUES( '"
-				+ cours.getId().toString()+ "','" + nom + "','" + debut + "','" + fin
-				+ "','" + idsalle + "','" + matricule + cours.getNumSemaine()
+		String value = "INSERT INTO COURS (nom, datedebut, datefin, idSalle, matricule, idGroupe, numSemaine) VALUES( '"
+				+ nom + "','" + debut + "','" + fin
+				+ "','" + idsalle.toString() + "','" + matricule.toString() + "','" + idGroupe.toString() + "','" + numSemaine
 				+ "');";
-		int status = 0;
-		// status = statement.executeUpdate(value);
-		if (status == 0) {
-			// msg d'erreur l'element n'a pas pu etre inserer dans a base
-			return null;
-		} else {
-			return cours;
+		DbConnexion db;
+		try {
+			db = new DbConnexion(value);
+			int status = db.executerInsert();
+			if(status == 0)
+			{
+				System.out.println("Le cours n'a pas pu etre rentre dans la base de donnee.");
+				return null;
+			}
+			else {
+				return cours;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		return null;
 	}
 
 	public int supprimerCours(Long id) {

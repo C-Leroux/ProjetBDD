@@ -21,7 +21,7 @@ public class VerificationCours {
         return date;
 	}
 	
-	// Les cours sont prevus du lundi au samedi de 8h00 ˆ 20h00 en creneaux de 2heures
+	// Les cours sont prevus du lundi au samedi de 8h00 ï¿½ 20h00 en creneaux de 2heures
 	private static boolean verifieCreneau(Cours cours)
 	{
 		Calendar dateDebut = dateToCalendar(cours.getDateDebut());
@@ -75,12 +75,12 @@ public class VerificationCours {
 		count += calculDureeCours(cours);
 		if(count < 8)
 			return true;
-		//affiche qu'il y a trop d'horaire dans une journŽe sinon
+		//affiche qu'il y a trop d'horaire dans une journï¿½e sinon
 		return false;
 	}
 	
 	private boolean verifiePauseDej(Long idGroupe, Cours cours){
-		//  selectionne les cours qui dŽbute a 12h00 et ˆ 14h00, met ˆ un si yaau moins un cours dedans b
+		//  selectionne les cours qui dï¿½bute a 12h00 et ï¿½ 14h00, met ï¿½ un si yaau moins un cours dedans b
 
 		Calendar pause12 = dateToCalendar(cours.getDateDebut());
 		pause12.set(Calendar.HOUR, 12);
@@ -98,8 +98,8 @@ public class VerificationCours {
 	}
 	
 	private boolean verifieNbPlacesSalle(Long idGroupe, Cours cours){
-		Groupe groupe = new Groupe();
-		groupe = groupe.getGroupebyId(idGroupe);
+
+		Groupe groupe = Groupe.getGroupebyId(idGroupe);
 		if(groupe.getNbPlaces() <= cours.getNbPlacesSalle())
 			return true;
 		return false;

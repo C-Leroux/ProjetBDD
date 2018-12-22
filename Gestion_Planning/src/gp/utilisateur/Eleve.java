@@ -22,7 +22,6 @@ public class Eleve extends Utilisateur implements IEleve {
     		, Date inscriptionDate, char sex, String villeNaissance, String numMaison, String numMobile, String photo, Long idGroupe,
     		String mdp, String email)
     {
-    	this.matricule++;
     	this.nom = nom;
     	this.prenom = prenom;
     	this.login = login;
@@ -42,12 +41,13 @@ public class Eleve extends Utilisateur implements IEleve {
     }
     
 	
-	public Eleve creerEleve(String nom, String prenom, String login, Date dateNaissance, String paysNaissance, String etablissementPrecedent
+	public static Eleve creerEleve(String nom, String prenom, String login, Date dateNaissance, String paysNaissance, String etablissementPrecedent
     		, Date inscriptionDate, char sex, String villeNaissance, String numMaison, String numMobile, String photo, Long idGroupe, String mdp, String email) throws ClassNotFoundException {
 		Eleve eleve = new Eleve(nom, prenom, login, dateNaissance, paysNaissance, etablissementPrecedent
 	    		, inscriptionDate, sex, villeNaissance, numMaison, numMobile, photo, idGroupe, mdp, email);
 		Long id = eleve.getMatricule();
-		String value = "INSERT INTO UTILISATEUR VALUES( '"+ id.intValue() + "','" + nom + "','" + prenom + "','" + mdp + "','" + login +  "','" + eleve.getRole() +  "','" + dateNaissance + "','" + villeNaissance + "','" +
+		String value = "INSERT INTO UTILISATEUR (nom, prenom, mdp, login, role, datenaissance, villenaissance, paysnaissance, sexe, dateinscription, etabPrecedent, teldomicile, telmobile, email, photo, rue, codePostal, ville, idGroupe) VALUES( '" 
+		+ nom + "','" + prenom + "','" + mdp + "','" + login +  "','" + eleve.getRole() +  "','" + dateNaissance + "','" + villeNaissance + "','" +
 		paysNaissance + "','" + sex + "','" + inscriptionDate + "','" + etablissementPrecedent + "','" + numMaison + "','" + numMobile + "','" + email + "','" + photo + "','','','' ,'" + idGroupe.intValue()+ "');" ;
 		DbConnexion db;
 		try {

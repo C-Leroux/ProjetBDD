@@ -1,6 +1,7 @@
 package gp.utilisateur;
 
 import gp.db.IAdministrateur;
+import main.DbConnexion;
 
 
 public class Administrateur extends Utilisateur implements IAdministrateur {
@@ -21,22 +22,31 @@ public class Administrateur extends Utilisateur implements IAdministrateur {
     	this.codePostal = codePostal;
     	this.ville = ville;
     }
-	public Administrateur creerAdministrateur(String nom, String prenom, String login
+	public static Administrateur creerAdministrateur(String nom, String prenom, String login
     		, String numMaison, String numMobile, String mdp, String email, String rue, String codePostal, String ville) {
 		Administrateur admin = new Administrateur(nom, prenom, login, numMaison, numMobile, mdp, email, rue, codePostal, ville);
-		Long id = admin.getMatricule();
-		// rajouter des null entre les champs manquqnt
-		String value = "INSERT INTO RESPONSABLE VALUES( '"+ id + "','" + nom + "','" + prenom + "','" + mdp + "','" + login +  "','" + admin.getRole() +  "','" + null +  "','" + null +  "','" + null +  "','" + null +  "','" + null +  "','" + null +  "','" + numMaison + "','" + numMobile + "','" + email + "','" + rue + "','" + null + "');";
-		int status = 0;
-		// status = statement.executeUpdate(value);
-		if(status == 0)
-		{
-			// msg d'erreur l'element n'a pas pu etre inserer dans a base 
-			return null;
+		java.util.Date d1 = new java.util.Date();
+		java.sql.Date d2 = new java.sql.Date(d1.getTime());
+		
+		String value = "INSERT INTO UTILISATEUR (nom, prenom, mdp , login, role, datenaissance, dateinscription, teldomicile, telmobile, email, rue, codePostal, ville) "
+				+ "VALUES ('" + nom + "','" + prenom + "','" + mdp + "','" + login +  "','" + Role.ADMINISTRATEUR.toString() + "','" + d2 + "','" + d2 + "','" + numMaison + "','" + numMobile + "','" + email + "','" + rue + "','" + codePostal + "','" + ville + "');";
+		DbConnexion db;
+		try {
+			db = new DbConnexion(value);
+			int status = db.executerInsert();
+			if(status == 0)
+			{
+				System.out.println("L'utilisateur n'a pas pu etre rentre dans la base de donnee.");
+				return null;
+			}
+			else {
+				return admin;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		else {
-			return admin;
-		}
+		return null;
 	}
 	public void sauvegarderAdministrateur() {}
 	
