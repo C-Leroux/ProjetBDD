@@ -17,7 +17,7 @@ public class Utilisateur {
 	protected Date dateNaissance = null;
 	protected String villeNaissance = null;
 	protected String paysNaissance = null;
-	protected String sex = null;
+	protected char sex;
 	protected Date inscriptionDate = null;
 	protected String etablissementPrecedent = null;
 	protected String photo = null;

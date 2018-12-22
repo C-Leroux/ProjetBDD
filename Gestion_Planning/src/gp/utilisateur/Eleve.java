@@ -10,15 +10,16 @@ import java.util.Date;
 
 import gp.cours.Cours;
 import gp.db.IEleve;
+import main.DbConnexion;
 
 
 public class Eleve extends Utilisateur implements IEleve {
 	
 	//Long idGroupe = 0L;
-	private ArrayList<Contact> contacts = new ArrayList<Contact>();
+	//private ArrayList<Contact> contacts = new ArrayList<Contact>();
 	
     public Eleve(String nom, String prenom, String login, Date dateNaissance, String paysNaissance, String etablissementPrecedent
-    		, Date inscriptionDate, String sex, String villeNaissance, String numMaison, String numMobile, String photo, Long idGroupe,
+    		, Date inscriptionDate, char sex, String villeNaissance, String numMaison, String numMobile, String photo, Long idGroupe,
     		String mdp, String email)
     {
     	this.matricule++;
@@ -42,22 +43,29 @@ public class Eleve extends Utilisateur implements IEleve {
     
 	
 	public Eleve creerEleve(String nom, String prenom, String login, Date dateNaissance, String paysNaissance, String etablissementPrecedent
-    		, Date inscriptionDate, String sex, String villeNaissance, String numMaison, String numMobile, String photo, Long idGroupe, String mdp, String email) {
+    		, Date inscriptionDate, char sex, String villeNaissance, String numMaison, String numMobile, String photo, Long idGroupe, String mdp, String email) throws ClassNotFoundException {
 		Eleve eleve = new Eleve(nom, prenom, login, dateNaissance, paysNaissance, etablissementPrecedent
 	    		, inscriptionDate, sex, villeNaissance, numMaison, numMobile, photo, idGroupe, mdp, email);
 		Long id = eleve.getMatricule();
-		String value = "INSERT INTO RESPONSABLE VALUES( '"+ id + "','" + nom + "','" + prenom + "','" + mdp + "','" + login +  "','" + eleve.getRole() +  "','" + dateNaissance + "','" + villeNaissance + "','" +
-		paysNaissance + "','" + sex + "','" + inscriptionDate + "','" + etablissementPrecedent + "','" + numMaison + "','" + numMobile + "','" + email + "','" + photo + "','" + idGroupe ;
-		int status = 0;
-		// status = statement.executeUpdate(value);
-		if(status == 0)
-		{
-			// msg d'erreur l'element n'a pas pu etre inserer dans a base 
-			return null;
+		String value = "INSERT INTO UTILISATEUR VALUES( '"+ id.intValue() + "','" + nom + "','" + prenom + "','" + mdp + "','" + login +  "','" + eleve.getRole() +  "','" + dateNaissance + "','" + villeNaissance + "','" +
+		paysNaissance + "','" + sex + "','" + inscriptionDate + "','" + etablissementPrecedent + "','" + numMaison + "','" + numMobile + "','" + email + "','" + photo + "','','','' ,'" + idGroupe.intValue()+ "');" ;
+		DbConnexion db;
+		try {
+			db = new DbConnexion(value);
+			int status = db.executerInsert();
+			if(status == 0)
+			{
+				System.out.println("L'utilisateur n'a pas pu etre rentre dans la base de donnee.");
+				return null;
+			}
+			else {
+				return eleve;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		else {
-			return eleve;
-		}
+		return null;
 	}
 	
 	public void sauvegarderEleve() {

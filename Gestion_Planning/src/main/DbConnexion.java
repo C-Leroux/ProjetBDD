@@ -43,6 +43,22 @@ public class DbConnexion {
 		return rs;
 	}
 	
+	//renvoie 0 en cas d'echec de la requete d'insertion, et 1 en cas de succes ;
+	public int executerInsert() throws SQLException {
+		Connection connexion;
+		try {
+			connexion = getDbConnexion();
+			this.st = connexion.createStatement();
+			System.out.println(this.requete);
+			return this.st.executeUpdate(this.requete);
+ 
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return 0;
+	}
+	
 	public ResultSet getResultSet() {
 		return this.rs;
 	}
