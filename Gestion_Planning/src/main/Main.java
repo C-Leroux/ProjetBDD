@@ -2,10 +2,13 @@ package main;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import gp.cours.Cours;
 import gp.groupes.Groupe;
@@ -19,7 +22,7 @@ import gp.utilisateur.Professeur;
 
 public class Main {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		try {
 
 	        // creation d'un groupe
@@ -61,34 +64,59 @@ public class Main {
 			
 			// Creation du cours 1
 			Calendar calendar = Calendar.getInstance();
-			calendar.set(2018, 12, 24, 12, 0);
+			calendar.set(2018, 12, 24, 12, 00, 00);
 			Date date = calendar.getTime();
-			 
-			java.sql.Date lundi2 = new java.sql.Date(date.getTime());
-			 
+			
+			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:kk:ss", Locale.ENGLISH);
+			String dateStr1 = format1.format(date);
+
+			Date date12 = new SimpleDateFormat("yyyy-MM-dd HH:kk:ss", Locale.ENGLISH).parse(dateStr1);
+			java.sql.Timestamp lundi2 = new java.sql.Timestamp(date12.getTime());
+			
+			System.out.println(format1);
+			// 2018-05-12
+			
+			
 			Calendar calendar2 = Calendar.getInstance();
-			calendar2.set(2018, 12, 24, 14, 0);
+			calendar2.set(2018, 12, 24, 14, 00, 00);
 			Date date2 = calendar2.getTime();
+			
+			SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd HH:kk:ss", Locale.ENGLISH);
+			String dateStr2 = format2.format(date2);
+
+			Date date22 = new SimpleDateFormat("yyyy-MM-dd HH:kk:ss", Locale.ENGLISH).parse(dateStr2);
 			 
-			java.sql.Date lundi4 = new java.sql.Date(date2.getTime());
+			java.sql.Timestamp lundi4 = new java.sql.Timestamp(date22.getTime());
 			
 			Cours cours = Cours.creerCours("algorithmique", lundi2, lundi4, 1L , 1L, 1L, 1);
 			
 			
 			// Creation du cours 2
+			
+			calendar = Calendar.getInstance();
+			calendar.set(2018, 12, 24, 16, 00, 00);
+			date = calendar.getTime();
+			
+			format1 = new SimpleDateFormat("yyyy-MM-dd HH:kk:ss", Locale.ENGLISH);
+			dateStr1 = format1.format(date);
 
-			Calendar calendar1 = Calendar.getInstance();
-			calendar1.set(2018, 12, 24, 12, 0);
-			Date date1 = calendar1.getTime();
+			date12 = new SimpleDateFormat("yyyy-MM-dd HH:kk:ss", Locale.ENGLISH).parse(dateStr1);
+			lundi2 = new java.sql.Timestamp(date12.getTime());
+						
+			
+			calendar2 = Calendar.getInstance();
+			calendar2.set(2018, 12, 24, 18, 00, 00);
+			date2 = calendar2.getTime();
+			
+			format2 = new SimpleDateFormat("yyyy-MM-dd HH:kk:ss", Locale.ENGLISH);
+			dateStr2 = format2.format(date2);
+
+			date22 = new SimpleDateFormat("yyyy-MM-dd HH:kk:ss", Locale.ENGLISH).parse(dateStr2);
 			 
-			java.sql.Date lundi3 = new java.sql.Date(date1.getTime());
-			 
-			Calendar calendar3 = Calendar.getInstance();
-			calendar3.set(2018, 12, 24, 14, 0);
-			Date date3 = calendar3.getTime();
-			 
-			java.sql.Date lundi5 = new java.sql.Date(date3.getTime());
-			Cours cours1 = Cours.creerCours("theorie des grpahe", lundi3, lundi5, 1L , 1L, 1L, 1);
+			lundi4 = new java.sql.Timestamp(date22.getTime());
+			
+			Cours cours1 = Cours.creerCours("theorie des graph", lundi2, lundi4, 1L , 1L, 1L, 1);
+
 			
 			// creation administrateur
 			Administrateur admin = Administrateur.creerAdministrateur("admin", "admin", "admin", "0698844194",  "0698844194", "Adminadmin", "admin@gmail.fr", "99", "94270", "kremlin bicetre");
@@ -157,7 +185,6 @@ public class Main {
 			    String promotion = rs3.getString("promotion");
 			    System.out.println(nom + " " + promotion );
 			}
-			
 			
 			
 			// fermeture de la base de donnée

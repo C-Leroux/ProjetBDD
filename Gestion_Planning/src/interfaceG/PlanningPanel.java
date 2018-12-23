@@ -51,7 +51,7 @@ public class PlanningPanel extends JPanel {
 				add (new JPanel(), new GridBagConstraints(j, i, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(1, 1, 0, 0), 0, 0));*/
 		}
 		
-		//creerCours();
+		creerCours();
 		
 		revalidate();
 		repaint();
@@ -61,11 +61,11 @@ public class PlanningPanel extends JPanel {
 		Calendar calendar = new GregorianCalendar();
 		ArrayList<Cours> cours;
 		try {
-			cours = utilisateur.getCoursByIdSemaine(calendar.getWeekYear());
+			//calendar.getWeekYear()
+			cours = this.utilisateur.getCoursByIdSemaine(1);
 			for (Cours c : cours)
 				ajoutCours(c);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

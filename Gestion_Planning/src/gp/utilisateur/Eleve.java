@@ -76,8 +76,6 @@ public class Eleve extends Utilisateur implements IEleve {
 		return null;
 	}
 	
-	public void sauvegarderEleve() {
-	}
 	
 	
 	public void getEleve() {

@@ -127,7 +127,6 @@ public class FenetreLog extends JFrame {
 			}
 			Long matricule = resultat.getLong("matricule");
 			Long idGroupe = resultat.getLong("idGroupe");
-			
 	        String role = resultat.getString("role");
 			Utilisateur utilisateur;
 			if(role.compareTo(Role.ETUDIANT.toString()) == 0)
@@ -135,13 +134,14 @@ public class FenetreLog extends JFrame {
 				utilisateur = new Eleve(matricule,login,mdp,idGroupe);
 			
 			}
-			if(role.compareTo(Role.PROFESSEUR.toString()) == 0) {
+			else if(role.compareTo(Role.PROFESSEUR.toString()) == 0) {
 				utilisateur = new Professeur(matricule,login,mdp);
 			}
-			else {
-
+			else if(role.compareTo(Role.ADMINISTRATEUR.toString()) == 0) {
 				utilisateur = new Administrateur(matricule, login, mdp);
 				
+			} else {
+				throw new RuntimeException("Role inconnu: " + role);
 			}
 			return utilisateur;
 			

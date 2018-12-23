@@ -12,17 +12,34 @@ import gp.utilisateur.Utilisateur;
 
 public class VerificationCours {
 	
+	/**
+    Convertit une date en calendar
+    @param date, la date à convertir.
+    @return Le calendar correspondant à la date.
+    */
+	
 	public static Calendar dateToCalendar(Date date) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		return calendar;
 	}
 	
+	/**
+    Convertit un calendar en date
+    @param date, le calendar à convertir.
+    @return date, la date converti.
+    */
 	public static Date CalendarToDate(Calendar calendar){
 		Date date =  calendar.getTime();
         return date;
 	}
 	
+	/**
+    Les cours sont prevus du lundi au samedi de 8h00 a 20h00
+    Verifie que les cours sont prevu sur les bonnes plages horaires
+    @param cours, .
+    @return date, la date converti.
+    */
 	// Les cours sont prevus du lundi au samedi de 8h00 a 20h00 en creneaux de 2heures
 	private static boolean verifieCreneau(Cours cours)
 	{
@@ -51,8 +68,6 @@ public class VerificationCours {
 			System.out.println("Le creaneau horaire du debut de cours ne corresponde pas");
 			return false;
 		}
-		//System.out.println(dateDebut.get(Calendar.HOUR_OF_DAY));
-		
 
 		
 	}

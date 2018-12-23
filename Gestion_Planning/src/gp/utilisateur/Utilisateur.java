@@ -43,6 +43,10 @@ public class Utilisateur {
     	return this.role.toString();
     }
     
+    public Long getIdGroupe() {
+    	return this.idGroupe;
+    }
+    
     public int supprimerUtilisateur(Long matricule) {
 		String value = "DELETE FROM UTILISATEUR WHERE matricule = "+ matricule.toString() + ";";
 		int status = 0;
@@ -59,7 +63,7 @@ public class Utilisateur {
 		try {
 			db = new DbConnexion(str);
 			ResultSet resultat = db.executerRequete();
-			// traite la liste de resultat
+			
 			ArrayList<Cours> listCours = new ArrayList<Cours>();
 			  while(resultat.next()){ 
 				  Long id = resultat.getLong("idCours");

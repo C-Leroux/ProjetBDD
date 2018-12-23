@@ -47,7 +47,6 @@ public class FenetrePlanning extends JFrame {
 		/*JPanel panel = new JPanel();
 		panel.setLayout(new GridBagLayout());
 		panel.setBackground(Color.white);*/
-
 	    PlanningPanel panel = new PlanningPanel(user);
 		
 		return panel;
