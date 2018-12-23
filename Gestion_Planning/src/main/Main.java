@@ -73,10 +73,6 @@ public class Main {
 			Date date12 = new SimpleDateFormat("yyyy-MM-dd HH:kk:ss", Locale.ENGLISH).parse(dateStr1);
 			java.sql.Timestamp lundi2 = new java.sql.Timestamp(date12.getTime());
 			
-			System.out.println(format1);
-			// 2018-05-12
-			
-			
 			Calendar calendar2 = Calendar.getInstance();
 			calendar2.set(2018, 12, 24, 14, 00, 00);
 			Date date2 = calendar2.getTime();
