@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import gp.cours.Cours;
@@ -22,7 +23,7 @@ public class Main {
 		try {
 
 	
-			Groupe groupe1 = Groupe.creerGroupe("TD A", GroupeType.TD, 30 , "L3 NEW 2021");
+			//Groupe groupe1 = Groupe.creerGroupe("TD A", GroupeType.TD, 30 , "L3 NEW 2021");
 			
 			
 			 java.util.Date d1 = new java.util.Date();
@@ -33,20 +34,33 @@ public class Main {
 		    		"Camille", "mouttecam@gmail.com");
 			
 			
-			Professeur p1 = Professeur.creerProfesseur("moutte", "jeannick", "201800099"
+			/*Professeur p1 = Professeur.creerProfesseur("moutte", "jeannick", "201800099"
 		    		, "0692523373", "0692523373", "Jeannick", "jj@gmail.com", "37 rue du grand hotel", "97434", "st paul");
 			
 			
 			
 			Salle salle = Salle.creerSalle("E01", 30, RoomType.COURS);
+			*/
 			
-			 //java.util.Date d1 = new java.util.Date();
-			 //java.sql.Date d2 = new java.sql.Date(d1.getTime());
+			 Calendar calendar = Calendar.getInstance();
+			 calendar.set(2018, 12, 24, 12, 0);
+			 Date date = calendar.getTime();
+			 
+			 java.sql.Date lundi2 = new java.sql.Date(date.getTime());
+			 
+			 Calendar calendar2 = Calendar.getInstance();
+			 calendar2.set(2018, 12, 24, 14, 0);
+			 Date date2 = calendar2.getTime();
+			 
+			 java.sql.Date lundi4 = new java.sql.Date(date2.getTime());
+			 
 			
-			Cours.creerCours("cours algo", d2, d2, 1L , 1L, 1L, 1);
-			Administrateur admin = Administrateur.creerAdministrateur("admin", "admin", "admin", "0698844194",  "0698844194", "Adminadmin", "admin@gmail.fr", "99", "94270", "kremlin bicetre");
+			Cours.creerCours("algo", lundi2, lundi4, 1L , 1L, 1L, 1);
 			
-			Contact contact = Contact.creeContact("resp","resp", "adresse", "0698844194", "resp@resp.fr", 1L);
+			
+			//Administrateur admin = Administrateur.creerAdministrateur("admin", "admin", "admin", "0698844194",  "0698844194", "Adminadmin", "admin@gmail.fr", "99", "94270", "kremlin bicetre");
+			
+			//Contact contact = Contact.creeContact("resp","resp", "adresse", "0698844194", "resp@resp.fr", 1L);
 			
 			
 			//Cours.supprimerCours(2L);

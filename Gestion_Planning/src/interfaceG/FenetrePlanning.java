@@ -23,7 +23,7 @@ import gp.utilisateur.Utilisateur;
 
 public class FenetrePlanning extends JFrame {
 	
-	public FenetrePlanning()
+	public FenetrePlanning(Utilisateur user)
 	{
 		super();
 		build();

@@ -9,6 +9,7 @@ import java.util.GregorianCalendar;
 
 import gp.db.ICours;
 import gp.utilisateur.Contact;
+import gp.verification.VerificationCours;
 import main.DbConnexion;
 
 public class Cours {
@@ -37,6 +38,9 @@ public class Cours {
 			Long idGroupe, int numSemaine) {
 		Cours cours = new Cours(nom, debut, fin, idsalle, matricule, idGroupe,
 				numSemaine);
+		boolean verefieCoursAInserer = VerificationCours.verifieCoursAInsrer(cours);
+		if(!verefieCoursAInserer)
+			return null;
 		String value = "INSERT INTO COURS (nom, datedebut, datefin, idSalle, matricule, idGroupe, numSemaine) VALUES( '"
 				+ nom + "','" + debut + "','" + fin
 				+ "','" + idsalle.toString() + "','" + matricule.toString() + "','" + idGroupe.toString() + "','" + numSemaine

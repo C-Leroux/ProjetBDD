@@ -6,6 +6,7 @@ import java.util.Date;
 
 import gp.cours.*;
 import gp.groupes.Groupe;
+import gp.utilisateur.Utilisateur;
 
 
 public class VerificationCours {
@@ -21,7 +22,7 @@ public class VerificationCours {
         return date;
 	}
 	
-	// Les cours sont prevus du lundi au samedi de 8h00 � 20h00 en creneaux de 2heures
+	// Les cours sont prevus du lundi au samedi de 8h00 a 20h00 en creneaux de 2heures
 	private static boolean verifieCreneau(Cours cours)
 	{
 		Calendar dateDebut = dateToCalendar(cours.getDateDebut());
@@ -31,40 +32,48 @@ public class VerificationCours {
 		}
 	
 		if(dateDebut.get(Calendar.HOUR_OF_DAY) >= 8 && dateDebut.get(Calendar.HOUR_OF_DAY) <= 20)
-			return true;
-		//System.out.println(dateDebut.get(Calendar.HOUR_OF_DAY));
-		
-		Calendar dateFin = dateToCalendar(cours.getDateFin());
-		if(dateFin.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY){
-			System.out.println("Dimanche pas de cours");
+		{
+			Calendar dateFin = dateToCalendar(cours.getDateFin());
+		    if(dateFin.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY){
+			    System.out.println("Dimanche pas de cours");
+			   return false;
+		    }
+		    if(dateFin.get(Calendar.HOUR_OF_DAY) >= 8 && dateFin.get(Calendar.HOUR_OF_DAY) <= 20)
+			   return true;
+		    if(dateFin.get(Calendar.DAY_OF_WEEK) == dateFin.get(Calendar.DAY_OF_WEEK))
+			  return true;
+		    System.out.println("Le creaneau horaire de fin de cours ne corresponde pas");
+		    return false;
+			
+	}
+		else {
+			System.out.println("Le creaneau horaire du debut de cours ne corresponde pas");
 			return false;
 		}
-		if(dateFin.get(Calendar.HOUR_OF_DAY) >= 8 && dateFin.get(Calendar.HOUR_OF_DAY) <= 20)
-			return true;
-		if(dateFin.get(Calendar.DAY_OF_WEEK) == dateFin.get(Calendar.DAY_OF_WEEK))
-			return true;
+		//System.out.println(dateDebut.get(Calendar.HOUR_OF_DAY));
 		
-		return false;
+
 		
 	}
 	
 	
-	private boolean verifieDureeCours(Cours cours){
+	private static boolean verifieDureeCours(Cours cours){
 		Calendar dateDebut = dateToCalendar(cours.getDateDebut());
 		Calendar dateFin = dateToCalendar(cours.getDateFin());
 		int nbHeure = dateFin.HOUR_OF_DAY - dateDebut.HOUR_OF_DAY;
 		if(nbHeure > 0 || nbHeure % 2 == 0)
 			return true;
+		System.out.println("Le cours n'a pas une plage horaire multiple de 2h00");
 		return false;
 	}
 	
-	private int calculDureeCours(Cours cours){
+	private static int calculDureeCours(Cours cours){
 		Calendar dateDebut = dateToCalendar(cours.getDateDebut());
 		Calendar dateFin = dateToCalendar(cours.getDateFin());
 		return dateFin.HOUR_OF_DAY - dateDebut.HOUR_OF_DAY;
 	}
 	
-	private boolean nbHeureMaxJour(Long idGroupe, Cours cours){
+	private static boolean nbHeureMaxJour(Long idGroupe, Cours cours){
 		
 		ArrayList<Cours> listCour = cours.getCoursbyIdDate(cours.getDateDebut(), idGroupe);
 		int count = 0;
@@ -75,12 +84,13 @@ public class VerificationCours {
 		count += calculDureeCours(cours);
 		if(count < 8)
 			return true;
-		//affiche qu'il y a trop d'horaire dans une journ�e sinon
+		//affiche qu'il y a trop d'horaire dans une journee sinon
+		System.out.println("le nombre d'heure par jour est dejà maximal");
 		return false;
 	}
 	
-	private boolean verifiePauseDej(Long idGroupe, Cours cours){
-		//  selectionne les cours qui d�bute a 12h00 et � 14h00, met � un si yaau moins un cours dedans b
+	private static boolean verifiePauseDej(Long idGroupe, Cours cours){
+		//  selectionne les cours qui debute a 12h00 et a 14h00, met a un si ya au moins un cours dedans b
 
 		Calendar pause12 = dateToCalendar(cours.getDateDebut());
 		pause12.set(Calendar.HOUR, 12);
@@ -94,6 +104,7 @@ public class VerificationCours {
 		    isExiste = cours.getCoursbyDateDebut(CalendarToDate(pause14), cours.getIdGroup());
 			return isExiste;
 		}
+		System.out.println("La pause dejeuner est deja faite");
 		return false;
 	}
 	
@@ -102,17 +113,18 @@ public class VerificationCours {
 		Groupe groupe = Groupe.getGroupebyId(idGroupe);
 		if(groupe.getNbPlaces() <= cours.getNbPlacesSalle())
 			return true;
+		System.out.println("Le nombre de place dans la salle n'est pas suffisante");
 		return false;
 	}
 	
-	private boolean verifieNbHeureSemaine(Cours cours)
+	private static boolean verifieNbHeureSemaine(Cours cours)
 	{
 		ArrayList<Cours> listCours = cours.getCoursbyIdSemaine(cours.getNumSemaine(), cours.getIdGroup());
 		return (listCours.size() < 15) ;
 	}
 	
 	
-	public boolean verifieCoursAInsrer(Cours cours)
+	public static boolean verifieCoursAInsrer(Cours cours)
 	{
 		if(verifieCreneau(cours)){
 			if(verifieDureeCours(cours)){
@@ -125,12 +137,6 @@ public class VerificationCours {
 		}
 		return false;
 	}
-	
-	/*public static void main(String[] args) {
-		Date date = new Date();
-		//Cours cours = new Cours(date, date, 2, 1);
-		//verifieCreneau(cours);
-	}*/
 
 }
 

@@ -24,9 +24,11 @@ import gp.utilisateur.Eleve;
 import gp.utilisateur.Professeur;
 import gp.utilisateur.Role;
 import gp.utilisateur.Utilisateur;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import main.DbConnexion;
 
-public class FenetreLog extends JFrame implements ActionListener{
+public class FenetreLog extends JFrame {
 		 
 	public FenetreLog () {
 		super ();
@@ -71,7 +73,30 @@ public class FenetreLog extends JFrame implements ActionListener{
 		JPasswordField txtMdp = new JPasswordField(25);
 		
 		JButton btnCo = new JButton("Connexion");
-		btnCo.addActionListener(this);
+		btnCo.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        String mdp = String.valueOf(txtMdp.getPassword());
+                        String username = txtLogin.getText();
+                        
+                        Utilisateur user = null;
+                        try {
+                            user = getLoginMdp(username, mdp);
+                        } catch (SQLException ex) {
+                            // TODO: Display Errror message
+                            Logger.getLogger(FenetreLog.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                        if (user != null) {
+                            setVisible(false);
+                            dispose();
+                            FenetrePlanning planning = new FenetrePlanning(user);
+                            planning.setVisible(true);
+   
+                        } else {
+                            // invalid credential
+                        }
+                    }
+                });
 		pan1.add(lbl);
 		pan2.add(lblLogin);
 		pan2.add(txtLogin);
@@ -86,32 +111,27 @@ public class FenetreLog extends JFrame implements ActionListener{
 	
 		return panel;
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		FenetrePlanning planning = new FenetrePlanning();
-		planning.setVisible(true);
-	}
 	
 	
 	private Utilisateur getLoginMdp(String login, String mdp) throws SQLException {
-		String str = "SELECT * FROM UTLISATEUR WHERE login = " + login
-				+ " AND mdp = " + mdp + ";";
+		String str = "SELECT * FROM UTILISATEUR WHERE login = '" + login
+				+ "' AND mdp = '" + mdp + "';";
 		DbConnexion db;
 		try {
 			db = new DbConnexion(str);
 			ResultSet resultat = db.executerRequete();
+			resultat.next();
 			Long matricule = resultat.getLong("matricule");
 			Long idGroupe = resultat.getLong("idGroupe");
-			Role role = Role.valueOf(resultat.getString("role"));
-	
+			
+	        String role = resultat.getString("role");
 			Utilisateur utilisateur;
-			if(role == Role.ETUDIANT)
+			if(role.compareTo(Role.ETUDIANT.toString()) == 0)
 			{
 				utilisateur = new Eleve(matricule,login,mdp,idGroupe);
+			
 			}
-			if(role == Role.PROFESSEUR) {
+			if(role.compareTo(Role.PROFESSEUR.toString()) == 0) {
 				utilisateur = new Professeur(matricule,login,mdp);
 			}
 			else {
