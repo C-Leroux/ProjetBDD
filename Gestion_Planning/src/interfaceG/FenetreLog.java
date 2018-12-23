@@ -121,7 +121,10 @@ public class FenetreLog extends JFrame {
 		try {
 			db = new DbConnexion(str);
 			ResultSet resultat = db.executerRequete();
-			resultat.next();
+			
+			if (!resultat.next()) {
+				return null;
+			}
 			Long matricule = resultat.getLong("matricule");
 			Long idGroupe = resultat.getLong("idGroupe");
 			

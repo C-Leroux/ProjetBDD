@@ -24,7 +24,7 @@ public class CreerUser extends JFrame implements ActionListener{
 		}
 		
 		private void build () {
-			setTitle("Créer un utilisateur");
+			setTitle("Creer un utilisateur");
 			setSize(320,240);
 			setLocationRelativeTo(null);
 			setResizable(false);
@@ -89,7 +89,7 @@ public class CreerUser extends JFrame implements ActionListener{
 			panel.add(femi);
 			
 			// Precedent etablissement de l'utilisateur
-			JLabel prec_et = new JLabel("Etablissement précédent");
+			JLabel prec_et = new JLabel("Etablissement prï¿½cï¿½dent");
 			panel.add(prec_et);
 			JTextField prec_etF = new JTextField();
 			panel.add(prec_etF);
@@ -114,14 +114,14 @@ public class CreerUser extends JFrame implements ActionListener{
 			JTextField villeF = new JTextField();
 			panel.add(villeF);
 			
-			// Numéro de rue de l'utilisateur
-			JLabel n_rue = new JLabel("Numéro de rue");
+			// Numï¿½ro de rue de l'utilisateur
+			JLabel n_rue = new JLabel("Numero de rue");
 			panel.add(n_rue);
 			JTextField n_rueF = new JTextField();
 			panel.add(n_rueF);
 			
-			// Numéro de portable de l'utilisateur
-			JLabel num = new JLabel("Numéro de portable");
+			// Numï¿½ro de portable de l'utilisateur
+			JLabel num = new JLabel("Numero de portable");
 			panel.add(num);
 			JTextField numF = new JTextField();
 			panel.add(numF);

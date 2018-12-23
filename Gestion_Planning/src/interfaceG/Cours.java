@@ -1,6 +1,6 @@
 package interfaceG;
 
-// Classe de test (remplacée par la table Cours de la BDD)
+// Classe de test (remplacee par la table Cours de la BDD)
 
 public class Cours {
 	private String nom;
