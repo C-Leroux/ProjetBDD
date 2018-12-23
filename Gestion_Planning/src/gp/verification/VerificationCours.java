@@ -1,5 +1,6 @@
 package gp.verification;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -73,7 +74,7 @@ public class VerificationCours {
 		return dateFin.HOUR_OF_DAY - dateDebut.HOUR_OF_DAY;
 	}
 	
-	private static boolean nbHeureMaxJour(Long idGroupe, Cours cours){
+	private static boolean nbHeureMaxJour(Long idGroupe, Cours cours) throws SQLException{
 		
 		ArrayList<Cours> listCour = cours.getCoursbyIdDate(cours.getDateDebut(), idGroupe);
 		int count = 0;
@@ -84,12 +85,11 @@ public class VerificationCours {
 		count += calculDureeCours(cours);
 		if(count < 8)
 			return true;
-		//affiche qu'il y a trop d'horaire dans une journee sinon
 		System.out.println("le nombre d'heure par jour est dejà maximal");
 		return false;
 	}
 	
-	private static boolean verifiePauseDej(Long idGroupe, Cours cours){
+	private static boolean verifiePauseDej(Long idGroupe, Cours cours) throws SQLException{
 		//  selectionne les cours qui debute a 12h00 et a 14h00, met a un si ya au moins un cours dedans b
 
 		Calendar pause12 = dateToCalendar(cours.getDateDebut());
@@ -108,7 +108,7 @@ public class VerificationCours {
 		return false;
 	}
 	
-	private boolean verifieNbPlacesSalle(Long idGroupe, Cours cours){
+	private static boolean verifieNbPlacesSalle(Long idGroupe, Cours cours) throws SQLException{
 
 		Groupe groupe = Groupe.getGroupebyId(idGroupe);
 		if(groupe.getNbPlaces() <= cours.getNbPlacesSalle())
@@ -117,20 +117,21 @@ public class VerificationCours {
 		return false;
 	}
 	
-	private static boolean verifieNbHeureSemaine(Cours cours)
+	private static boolean verifieNbHeureSemaine(Cours cours) throws SQLException
 	{
 		ArrayList<Cours> listCours = cours.getCoursbyIdSemaine(cours.getNumSemaine(), cours.getIdGroup());
 		return (listCours.size() < 15) ;
 	}
 	
 	
-	public static boolean verifieCoursAInsrer(Cours cours)
+	public static boolean verifieCoursAInsrer(Cours cours) throws SQLException
 	{
 		if(verifieCreneau(cours)){
 			if(verifieDureeCours(cours)){
 				if(nbHeureMaxJour(cours.getIdGroup(),cours)){
 					if(verifiePauseDej(cours.getIdGroup(), cours)){
-						return verifieNbHeureSemaine(cours);
+						if(verifieNbHeureSemaine(cours))
+							return verifieNbPlacesSalle(cours.getIdGroup(), cours);
 					}
 				}
 			}

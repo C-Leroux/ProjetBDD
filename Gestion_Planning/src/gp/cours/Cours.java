@@ -1,5 +1,7 @@
 package gp.cours;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ public class Cours {
 	private int numSemaine = 0;
 
 	public Cours(String nom, Date debut, Date fin, Long idsalle, Long matricule,
-			Long idGroupe, int numSemaine) {
+			Long idGroupe, int numSemaine) throws SQLException {
 		this.nom = nom;
 		this.dateDebut = debut;
 		this.dateFin = fin;
@@ -35,7 +37,7 @@ public class Cours {
 	}
 
 	public static Cours creerCours(String nom, Date debut, Date fin, Long idsalle, Long matricule,
-			Long idGroupe, int numSemaine) {
+			Long idGroupe, int numSemaine) throws SQLException {
 		Cours cours = new Cours(nom, debut, fin, idsalle, matricule, idGroupe,
 				numSemaine);
 		boolean verefieCoursAInserer = VerificationCours.verifieCoursAInsrer(cours);
@@ -87,15 +89,27 @@ public class Cours {
 
 	// si le cours existe deja
 	// selectionne le cours avec une date de debut egale
-	public boolean getCoursbyDateDebut(Date date, Long idGroupe) {
-		// selectionne le cours avec une date de debut egale
-		String str = "SELECT * FROM SALLE WHERE dateDebut = " + date
-				+ " AND idGroupe = " + idGroupe.toString() + ";";
-		// ResultSet resultat = statement.executeQuery(str);
-		Cours cours;
-		Long idCours = -1L;
-		// idCours = resultat.getLong();
-		return !(idCours == -1);
+	public boolean getCoursbyDateDebut(Date date, Long idGroupe) throws SQLException {
+		java.sql.Date dateSql = new java.sql.Date(date.getTime());
+		
+		String str = "SELECT * FROM COURS WHERE datedebut = '" + dateSql
+				+ "' AND idGroupe = '" + idGroupe.toString() + "';";
+		DbConnexion db;
+		try {
+			db = new DbConnexion(str);
+			ResultSet resultat = db.executerRequete();
+			//resultat.next();
+			// traite la liste de resultat
+			Cours cours;
+			Long idCours = -1L;
+			if(resultat.next())
+			  idCours = resultat.getLong("idCours");
+			return (idCours == -1);
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	public Long getIdSalle() {
@@ -103,13 +117,26 @@ public class Cours {
 
 	}
 
-	public int getNbPlacesSalle() {
-		String str = "SELECT nbPlaces FROM SALLE WHERE idSalle = "
-				+ this.idSalle + ";";
-		// ResultSet resultat = statement.executeQuery(str);
-		int nbPlace = 0;
-		// nbPlace = resultat.getInt();
-		return nbPlace;
+	public int getNbPlacesSalle() throws SQLException {
+		String str = "SELECT nbPlaces FROM SALLE WHERE idSalle = '"
+				+ this.idSalle + "';";
+		DbConnexion db;
+		try {
+			db = new DbConnexion(str);
+			int nbPlace = 0;
+			ResultSet resultat = db.executerRequete();
+			// traite la liste de resultat
+
+			  if(resultat.next()){ 
+				  return resultat.getInt("nbPlaces");
+			  }
+			 
+			return nbPlace;
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
 	public Long getIdGroup() {
@@ -124,40 +151,64 @@ public class Cours {
 		return this.numSemaine;
 	}
 
-	public static ArrayList<Cours> getCoursbyIdSemaine(int idSemaine, Long idGroupe) {
-		String str = "SELECT * FROM COURS WHERE numSemaine = " + idSemaine
-				+ " AND idGroupe = " + idGroupe + ";";
-		// ResultSet resultat = statement.executeQuery(str);
-
-		// traite la liste de r�sultat
-		ArrayList<Cours> listCours = new ArrayList<Cours>();
-		/*
-		 * while(resultat.next()){ Long id = resultat.getLong(); Date debut =
-		 * resultat.getDate(); Date fin = resultat.getDate(); Long idSalle =
-		 * resultat.getLong(); Long matricule = resultat.getLong(); Long
-		 * idGroupe = resultat.getLong(); int numSemaine = resultat.getString();
-		 * Cours cours = new Cours(id, debut, fin, idSalle, matricule, idGroupe,
-		 * numSemaine); listContact.add(contact); }
-		 */
-		return listCours;
+	public static ArrayList<Cours> getCoursbyIdSemaine(int idSemaine, Long idGroupe) throws SQLException {
+		String str = "SELECT * FROM COURS WHERE numSemaine = '" + idSemaine
+				+ "' AND idGroupe = '" + idGroupe + "';";
+		DbConnexion db;
+		try {
+			db = new DbConnexion(str);
+			ResultSet resultat = db.executerRequete();
+			// traite la liste de resultat
+			ArrayList<Cours> listCours = new ArrayList<Cours>();
+			  while(resultat.next()){ 
+				  Long id = resultat.getLong("idCours");
+				  String nom = resultat.getString("nom");
+				  Date debut = resultat.getDate("datedebut"); 
+				  Date fin = resultat.getDate("datefin"); 
+				  Long idSalle = resultat.getLong("idSalle"); 
+				  Long matricule = resultat.getLong("matricule"); 
+				  int numSemaine = resultat.getInt("numSemaine");
+			      Cours cours = new Cours(nom, debut, fin, idSalle, matricule, idGroupe, numSemaine); 
+			      listCours.add(cours); 
+			  }
+			 
+			return listCours;
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
-	public static ArrayList<Cours> getCoursbyIdDate(Date date, Long idGroupe) {
-		String str = "SELECT * FROM COURS WHERE dateDebut = " + date
-				+ " AND idGroupe = " + idGroupe + ";";
-		// ResultSet resultat = statement.executeQuery(str);
-
-		// traiter la liste de r�sultat
-		ArrayList<Cours> listCours = new ArrayList<Cours>();
-		/*
-		 * while(resultat.next()){ Long id = resultat.getLong(); Date debut =
-		 * resultat.getDate(); Date fin = resultat.getDate(); Long idSalle =
-		 * resultat.getLong(); Long matricule = resultat.getLong(); Long
-		 * idGroupe = resultat.getLong(); int numSemaine = resultat.getString();
-		 * Cours cours = new Cours(id, debut, fin, idSalle, matricule, idGroupe,
-		 * numSemaine); listContact.add(contact); }
-		 */
-		return listCours;
+	public static ArrayList<Cours> getCoursbyIdDate(Date date, Long idGroupe) throws SQLException {
+		java.sql.Date dateSql = new java.sql.Date(date.getTime());
+		
+		String str = "SELECT * FROM COURS WHERE datedebut = '" + dateSql
+				+ "' AND idGroupe = '" + idGroupe.toString() + "';";
+		DbConnexion db;
+		try {
+			db = new DbConnexion(str);
+			ResultSet resultat = db.executerRequete();
+			// traite la liste de resultat
+			ArrayList<Cours> listCours = new ArrayList<Cours>();
+			  while(resultat.next()){ 
+				  Long id = resultat.getLong("idCours");
+				  String nom = resultat.getString("nom");
+				  Date debut = resultat.getDate("datedebut"); 
+				  Date fin = resultat.getDate("datefin"); 
+				  Long idSalle = resultat.getLong("idSalle"); 
+				  Long matricule = resultat.getLong("matricule"); 
+				  int numSemaine = resultat.getInt("numSemaine");
+			      Cours cours = new Cours(nom, debut, fin, idSalle, matricule, idGroupe, numSemaine); 
+			      listCours.add(cours); 
+			  }
+			 
+			return listCours;
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public int getJour() {
