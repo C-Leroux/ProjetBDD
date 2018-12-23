@@ -94,6 +94,7 @@ public class Utilisateur {
 				  Long id = resultat.getLong("idCours");
 				  String nom = resultat.getString("nom");
 				  Date debut = resultat.getDate("datedebut"); 
+				  System.out.println("cours " + debut.toString());
 				  Date fin = resultat.getDate("datefin"); 
 				  Long idSalle = resultat.getLong("idSalle"); 
 				  Long matricule = resultat.getLong("matricule"); 

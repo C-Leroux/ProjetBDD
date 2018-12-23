@@ -34,3 +34,17 @@ Etape 4:
 - cliquer sur le Main.java dans le package main
 - cliquer sur run pour lancer l'interface graphique
 - la creation des eleves, des cours, des groupes, des salles, des professeurs, des administrateurs est deja faite
+
+Etape 5:
+Pour l'eleve :
+- entrer : login : 20180005
+           mot de passe : Camille
+           
+Pour l'administrateur : 
+- login : admin
+  mot de passe : Adminadmin
+  
+ Pour le professeur : 
+ - login : 201800099
+  mot de passe : Jeannick
+ 
