@@ -28,7 +28,8 @@ public class Main {
 
 			java.util.Date d1 = new java.util.Date();
 			java.sql.Date d2 = new java.sql.Date(d1.getTime());
-			 
+			
+			// creation des eleves
 			Eleve eleve = Eleve.creerEleve("moutte", "camille", "20180005", d2 ,"Vietnam","EPITA"
 		    		, d2, 'F', "Hochiminh", " ", "0698844194", "", 1L,
 		    		"Camille", "mouttecam@gmail.com");
@@ -41,11 +42,16 @@ public class Main {
 		    		, d2, 'M', "Paris", " ", "0698844194", "", 1L,
 		    		"Leroux", "oku.sydney@efrei.net");
 			
-			Professeur p1 = Professeur.creerProfesseur("moutte", "jeannick", "201800099"
+			// creation de professeur
+			Professeur professeur1 = Professeur.creerProfesseur("moutte", "jeannick", "201800099"
 		    		, "0692523373", "0692523373", "Jeannick", "jj@gmail.com", "37 rue du grand hotel", "97434", "st paul");
 			
+			Professeur professeur2 = Professeur.creerProfesseur("fourdan", "", "201800099"
+		    		, "0692523373", "0692523373", "Jeannick", "jj@gmail.com", "37 rue du grand hotel", "97434", "st paul");
+			Professeur professeur3 = Professeur.creerProfesseur("moutte", "jeannick", "201800099"
+		    		, "0692523373", "0692523373", "Jeannick", "jj@gmail.com", "37 rue du grand hotel", "97434", "st paul");
 			
-			
+			// creation de salle
 			Salle salle = Salle.creerSalle("E00", 30, RoomType.COURS);
 			Salle salle1 = Salle.creerSalle("E01", 30, RoomType.AMPHI);
 			Salle salle2 = Salle.creerSalle("E02", 30, RoomType.LABO);
@@ -68,20 +74,24 @@ public class Main {
 			
 			Cours cours = Cours.creerCours("algo", lundi2, lundi4, 1L , 1L, 1L, 1);
 			
+			// creation administrateur
+			Administrateur admin = Administrateur.creerAdministrateur("admin", "admin", "admin", "0698844194",  "0698844194", "Adminadmin", "admin@gmail.fr", "99", "94270", "kremlin bicetre");
+			Administrateur admin2 = Administrateur.creerAdministrateur("admin2", "admin2", "admin", "0698844194",  "0698844194", "Adminadmin", "admin@gmail.fr", "99", "94270", "kremlin bicetre");
 			
-			//Administrateur admin = Administrateur.creerAdministrateur("admin", "admin", "admin", "0698844194",  "0698844194", "Adminadmin", "admin@gmail.fr", "99", "94270", "kremlin bicetre");
-			
-			//Contact contact = Contact.creeContact("resp","resp", "adresse", "0698844194", "resp@resp.fr", 1L);
+			// creation contact
+			Contact contact = Contact.creeContact("resp","resp", "adresse", "0698844194", "resp@resp.fr", 1L);
+			Contact contact1 = Contact.creeContact("resp1","resp1", "adresse", "0698844194", "resp@resp.fr", 1L);
+			Contact contact2 = Contact.creeContact("resp2","resp2", "adresse", "0698844194", "resp@resp.fr", 1L);
 			
 			
 			//Cours.supprimerCours(2L);
-			  System.out.println("------------------");
-		      ArrayList<Cours> listcours = eleve.getCoursByIdSemaine(1);
-		      System.out.println(listcours.size());
-		      for(int i = 0; i < listcours.size(); i++) {
-		    	  System.out.println(listcours.get(i).getNom());
-		      }
-		      System.out.println("------------------");
+			System.out.println("------------------");
+		    ArrayList<Cours> listcours = eleve.getCoursByIdSemaine(1);
+		    System.out.println(listcours.size());
+		    for(int i = 0; i < listcours.size(); i++) {
+		    	System.out.println(listcours.get(i).getNom());
+		    }
+		    System.out.println("------------------");
 		      
 		      
 			DbConnexion db = new DbConnexion("SELECT * FROM utilisateur;");
