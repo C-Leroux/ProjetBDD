@@ -6,6 +6,7 @@ public class Main {
 		// TODO Auto-generated method stub
 
 		FenetreLog fenetre = new FenetreLog();
+		//AjoutCours fenetre = new AjoutCours();
 		fenetre.setVisible(true);
 	}
 
