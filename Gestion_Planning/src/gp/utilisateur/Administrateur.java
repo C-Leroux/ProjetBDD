@@ -78,7 +78,7 @@ public class Administrateur extends Utilisateur implements IAdministrateur {
 		
 		String value = "INSERT INTO UTILISATEUR (nom, prenom, mdp , login, role, datenaissance, dateinscription, teldomicile, telmobile, email, rue, codePostal, ville) "
 				+ "VALUES ('" + nom + "','" + prenom + "','" + mdp + "','" + login +  "','" + Role.ADMINISTRATEUR.toString() + "','" + d2 + "','" + d2 + "','" + numMaison + "','" + numMobile + "','" + email + "','" + rue + "','" + codePostal + "','" + ville + "');";
-		DbConnexion db;
+		DbConnexion db = null;
 		try {
 			db = new DbConnexion(value);
 			int status = db.executerInsert();
@@ -93,6 +93,8 @@ public class Administrateur extends Utilisateur implements IAdministrateur {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			db.fermerConnexion();
 		}
 		return null;
 	}

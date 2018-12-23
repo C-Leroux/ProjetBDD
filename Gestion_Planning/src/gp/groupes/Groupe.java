@@ -60,7 +60,7 @@ public class Groupe implements IGroupe {
 	public static Groupe creerGroupe(String nom, GroupeType group, int nbPlaces, String promo) {
 		Groupe groupe = new Groupe( nom, group, nbPlaces, promo);
 		String value = "INSERT INTO GROUPE  (nom, promotion, type, nbeleves) VALUES( '" + nom + "','" + promo + "','" + group.toString() + "','"+ nbPlaces +"');";
-		DbConnexion db;
+		DbConnexion db = null;
 		try {
 			db = new DbConnexion(value);
 			int status = db.executerInsert();
@@ -75,6 +75,8 @@ public class Groupe implements IGroupe {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			db.fermerConnexion();
 		}
 		return null;
 	}

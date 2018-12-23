@@ -146,6 +146,7 @@ public class Main {
 			    String role = rs.getString("role");
 			    System.out.println(matricule + " " + nom + " " + prenom + " " + role);
 			}
+			db.fermerConnexion();
 			
 			System.out.println("------------------");   
 		    System.out.println("-- Liste des salles --");  
@@ -158,7 +159,8 @@ public class Main {
 			    String typeSalle = rs1.getString("typeSalle");
 			    System.out.println(nom +  " " + nbPlaces + " " + typeSalle);
 			}
-			
+			db1.fermerConnexion();
+
 			
 			System.out.println("------------------");   
 		    System.out.println("-- Liste des Responsables eleves --");  
@@ -171,7 +173,8 @@ public class Main {
 			    int matricule = rs2.getInt("matricule");
 			    System.out.println(nom + " " + prenom + "  Responbla de l'eleve " + matricule);
 			}
-			
+			db2.fermerConnexion();
+
 			
 			System.out.println("------------------");   
 		    System.out.println("-- Liste des Groupes --");  
@@ -191,7 +194,7 @@ public class Main {
 			//fenetre.setVisible(true);
 			
 			// fermeture de la base de donnée
-			db.fermerConnexion();
+			db3.fermerConnexion();
 			
 		} catch (ClassNotFoundException e) {
 			System.out.println("Driver de la base de donnee non trouve");

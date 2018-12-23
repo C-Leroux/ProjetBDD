@@ -84,7 +84,7 @@ public class Utilisateur {
     {
     	String str = "SELECT * FROM COURS WHERE numSemaine = " + idSemaine
 				+ " AND idGroupe = " + this.idGroupe + ";";
-    	DbConnexion db;
+    	DbConnexion db = null;
 		try {
 			db = new DbConnexion(str);
 			ResultSet resultat = db.executerRequete();
@@ -107,6 +107,8 @@ public class Utilisateur {
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+		} finally {
+			db.fermerConnexion();
 		}
 		return null;
 

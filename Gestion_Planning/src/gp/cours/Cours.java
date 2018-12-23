@@ -160,7 +160,7 @@ public class Cours {
 	public int getNbPlacesSalle() throws SQLException {
 		String str = "SELECT nbPlaces FROM SALLE WHERE idSalle = '"
 				+ this.idSalle + "';";
-		DbConnexion db;
+		DbConnexion db = null;
 		try {
 			db = new DbConnexion(str);
 			int nbPlace = 0;
@@ -171,10 +171,12 @@ public class Cours {
 				  return resultat.getInt("nbPlaces");
 			  }
 			 
-			return nbPlace;
+			  return nbPlace;
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+		} finally {
+			db.fermerConnexion();
 		}
 		return 0;
 	}

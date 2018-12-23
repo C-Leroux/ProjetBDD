@@ -42,7 +42,7 @@ public class DbConnexion {
 	
 	/** 
 	Récupère une connexion vers la base de donnees en utilisant le driver JDBC.
-    @return Instance de la connexion vers la base de donnees.
+    @return une instance de la connexion vers la base de donnees.
     */
 
     private Connection getDbConnexion() throws SQLException {
@@ -55,8 +55,8 @@ public class DbConnexion {
     */
     
 	public ResultSet executerRequete() throws SQLException {
-		Connection connexion = getDbConnexion();
-		this.st = connexion.createStatement();
+		this.connexion = getDbConnexion();
+		this.st = this.connexion.createStatement();
 		this.rs = st.executeQuery(requete);		
 		return rs;
 	}
@@ -67,10 +67,9 @@ public class DbConnexion {
     @returnrenvoie 0 en cas d'echec de la requete d'insertion, et 1 en cas de succes ;
     */
 	public int executerInsert() throws SQLException {
-		Connection connexion;
 		try {
-			connexion = getDbConnexion();
-			this.st = connexion.createStatement();
+			this.connexion = getDbConnexion();
+			this.st = this.connexion.createStatement();
 			return this.st.executeUpdate(this.requete);
  
 		} catch (SQLException e1) {
@@ -89,8 +88,12 @@ public class DbConnexion {
 	 */
 	public void fermerConnexion() {
 		try {
-			this.rs.close();
-			this.st.close();			
+			if (this.rs != null) {
+				this.rs.close();				
+			}
+			if (this.st != null) {
+				this.st.close();							
+			}
 		} catch (SQLException e) {
 			System.out.println("Erreur lors de la requete a la base de donnee " + e.getMessage());
 	    } finally {
@@ -99,6 +102,8 @@ public class DbConnexion {
 	                this.connexion.close();
 	            } catch (SQLException ignore) {
 	            }				
+			} else {
+				System.out.println("Connexion not defined");
 			}
 	    }
 	}

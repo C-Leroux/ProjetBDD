@@ -46,7 +46,7 @@ public class Contact implements IContact {
 	public static Contact creeContact(String nom, String prenom, String adresse, String telephone, String email, Long matricule) {
 		Contact contact = new Contact(nom, prenom, adresse, telephone, email, matricule);
 		String value = "INSERT INTO RESPONSABLE (nomResp, prenomResp, adresseResp, telResp, emailResp, matricule) VALUES( '" + nom + "','" + prenom + "','" + adresse + "','" + telephone + "','" + email + "','" + matricule + "');";
-		DbConnexion db;
+		DbConnexion db = null;
 		try {
 			db = new DbConnexion(value);
 			int status = db.executerInsert();
@@ -61,6 +61,8 @@ public class Contact implements IContact {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			db.fermerConnexion();
 		}
 		return null;
 

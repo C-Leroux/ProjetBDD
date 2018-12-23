@@ -98,7 +98,7 @@ public class Eleve extends Utilisateur implements IEleve {
 		String value = "INSERT INTO UTILISATEUR (nom, prenom, mdp, login, role, datenaissance, villenaissance, paysnaissance, sexe, dateinscription, etabPrecedent, teldomicile, telmobile, email, photo, rue, codePostal, ville, idGroupe) VALUES( '" 
 		+ nom + "','" + prenom + "','" + mdp + "','" + login +  "','" + eleve.getRole() +  "','" + dateNaissance + "','" + villeNaissance + "','" +
 		paysNaissance + "','" + sex + "','" + inscriptionDate + "','" + etablissementPrecedent + "','" + numMaison + "','" + numMobile + "','" + email + "','" + photo + "','','','' ,'" + idGroupe.intValue()+ "');" ;
-		DbConnexion db;
+		DbConnexion db = null;
 		try {
 			db = new DbConnexion(value);
 			int status = db.executerInsert();
@@ -113,6 +113,8 @@ public class Eleve extends Utilisateur implements IEleve {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			db.fermerConnexion();
 		}
 		
 		return null;
