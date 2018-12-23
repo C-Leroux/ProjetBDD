@@ -22,40 +22,51 @@ public class Main {
 	public static void main(String[] args) {
 		try {
 
-	
-			//Groupe groupe1 = Groupe.creerGroupe("TD A", GroupeType.TD, 30 , "L3 NEW 2021");
+	        // creation d'un groupe
+			Groupe groupe1 = Groupe.creerGroupe("TD A", GroupeType.TD, 30 , "L3 NEW 2021");
 			
-			
-			 java.util.Date d1 = new java.util.Date();
-			 java.sql.Date d2 = new java.sql.Date(d1.getTime());
+
+			java.util.Date d1 = new java.util.Date();
+			java.sql.Date d2 = new java.sql.Date(d1.getTime());
 			 
 			Eleve eleve = Eleve.creerEleve("moutte", "camille", "20180005", d2 ,"Vietnam","EPITA"
 		    		, d2, 'F', "Hochiminh", " ", "0698844194", "", 1L,
 		    		"Camille", "mouttecam@gmail.com");
 			
+			Eleve eleve2 = Eleve.creerEleve("Leroux", "Corentin", "2018010", d2 ,"France","EPITA"
+		    		, d2, 'M', "Paris", " ", "0698844194", "", 1L,
+		    		"Leroux", "leroux.corentin@efrei.net");
 			
-			/*Professeur p1 = Professeur.creerProfesseur("moutte", "jeannick", "201800099"
+			Eleve eleve3 = Eleve.creerEleve("Okou", "Sydney", "2018015", d2 ,"France","EPITA"
+		    		, d2, 'M', "Paris", " ", "0698844194", "", 1L,
+		    		"Leroux", "oku.sydney@efrei.net");
+			
+			Professeur p1 = Professeur.creerProfesseur("moutte", "jeannick", "201800099"
 		    		, "0692523373", "0692523373", "Jeannick", "jj@gmail.com", "37 rue du grand hotel", "97434", "st paul");
 			
 			
 			
-			Salle salle = Salle.creerSalle("E01", 30, RoomType.COURS);
-			*/
+			Salle salle = Salle.creerSalle("E00", 30, RoomType.COURS);
+			Salle salle1 = Salle.creerSalle("E01", 30, RoomType.AMPHI);
+			Salle salle2 = Salle.creerSalle("E02", 30, RoomType.LABO);
+			Salle salle3 = Salle.creerSalle("E03", 30, RoomType.SOUTENANCE);
+			Salle salle4 = Salle.creerSalle("E04", 30, RoomType.COURS);
 			
-			 Calendar calendar = Calendar.getInstance();
-			 calendar.set(2018, 12, 24, 12, 0);
-			 Date date = calendar.getTime();
-			 
-			 java.sql.Date lundi2 = new java.sql.Date(date.getTime());
-			 
-			 Calendar calendar2 = Calendar.getInstance();
-			 calendar2.set(2018, 12, 24, 14, 0);
-			 Date date2 = calendar2.getTime();
-			 
-			 java.sql.Date lundi4 = new java.sql.Date(date2.getTime());
-			 
 			
-			Cours.creerCours("algo", lundi2, lundi4, 1L , 1L, 1L, 1);
+			// Creation d'un cours
+			Calendar calendar = Calendar.getInstance();
+			calendar.set(2018, 12, 24, 12, 0);
+			Date date = calendar.getTime();
+			 
+			java.sql.Date lundi2 = new java.sql.Date(date.getTime());
+			 
+			Calendar calendar2 = Calendar.getInstance();
+			calendar2.set(2018, 12, 24, 14, 0);
+			Date date2 = calendar2.getTime();
+			 
+			java.sql.Date lundi4 = new java.sql.Date(date2.getTime());
+			
+			Cours cours = Cours.creerCours("algo", lundi2, lundi4, 1L , 1L, 1L, 1);
 			
 			
 			//Administrateur admin = Administrateur.creerAdministrateur("admin", "admin", "admin", "0698844194",  "0698844194", "Adminadmin", "admin@gmail.fr", "99", "94270", "kremlin bicetre");
