@@ -1,5 +1,10 @@
 package gp.salles;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Date;
+
+import gp.cours.Cours;
 import gp.db.ISalle;
 import main.DbConnexion;
 
@@ -10,7 +15,12 @@ public class Salle implements ISalle {
 	private RoomType type = null;
 	
 	public Salle(String nom, int nbPlaces, RoomType type){
-		this.code++;
+		this.nom = nom;
+		this.nbPlaces = nbPlaces;
+		this.type = type;
+	}
+	public Salle(Long id, String nom, int nbPlaces, RoomType type){
+		this.code = id;
 		this.nom = nom;
 		this.nbPlaces = nbPlaces;
 		this.type = type;
@@ -37,7 +47,7 @@ public class Salle implements ISalle {
 		}
 		return null;
 	}
-	public void sauvegarderSalle() {}
+	
 	public int supprimerSalle(Long code) {
 		String value = "DELETE FROM SALLE WHERE idSalle = "+ code.toString() + ";";
 		int status = 0;

@@ -16,6 +16,15 @@ public class Groupe implements IGroupe {
 	int nbPlaces = 0;
 	String promo = null;
 	
+	/**
+    Constructeur du groupe
+    @param nom, le nom de l'utilisateur
+    @param group, le type de groupe (TD, ELECTIF, LANGUE)
+    @param nbPlaces, le nombre d'eleve dans le groupe
+    @param promo, l'annee de la promotion
+    @return Groupe
+    */
+	
 	public Groupe(String name, GroupeType group, int nbPlaces, String promo){
 		this.nom = name;
 		this.group = group;
@@ -23,6 +32,15 @@ public class Groupe implements IGroupe {
 		this.promo = promo;
 	}
 	
+	/**
+    Constructeur du groupe
+    @param id, l'id d'un groupe
+    @param nom, le nom de l'utilisateur
+    @param group, le type de groupe (TD, ELECTIF, LANGUE)
+    @param nbPlaces, le nombre d'eleve dans le groupe
+    @param promo, l'annee de la promotion
+    @return Groupe
+    */
 	public Groupe(Long id, String name, GroupeType group, int nbPlaces, String promo){
 		this.id = id;
 		this.nom = name;
@@ -31,6 +49,14 @@ public class Groupe implements IGroupe {
 		this.promo = promo;
 	}
 	
+	/**
+    Creer un groupe et insert dans la base de donnee
+    @param nom, le nom de l'utilisateur
+    @param group, le type de groupe (TD, ELECTIF, LANGUE)
+    @param nbPlaces, le nombre d'eleve dans le groupe
+    @param promo, l'annee de la promotion
+    @return Groupe
+    */
 	public static Groupe creerGroupe(String nom, GroupeType group, int nbPlaces, String promo) {
 		Groupe groupe = new Groupe( nom, group, nbPlaces, promo);
 		String value = "INSERT INTO GROUPE  (nom, promotion, type, nbeleves) VALUES( '" + nom + "','" + promo + "','" + group.toString() + "','"+ nbPlaces +"');";
@@ -52,15 +78,22 @@ public class Groupe implements IGroupe {
 		}
 		return null;
 	}
-	public void supprimerGroupe() {}
-	public void getGroupe() {}
-//	public void rechercherParPromotion(){}
-//	public void rechercherParGroupe(){}
 	
+	
+	/**
+    Creer un groupe et insert dans la base de donnee
+    @param 
+    @return id du groupe
+    */
 	public Long getId(){
 		return this.id;
 	}
 	
+	/**
+    selection le groupe avec l'id passer en parametre
+    @param id du groupe
+    @return groupe
+    */
 	public static Groupe getGroupebyId(Long id) throws SQLException{		
 		String str = "SELECT * FROM GROUPE WHERE idGroupe = '" + id.toString() + "';" ;
 		DbConnexion db;
@@ -88,7 +121,11 @@ public class Groupe implements IGroupe {
 		
 	
 	}
-	
+	/**
+    getter nombre d'eleve dans le groupe
+    @param
+    @return nombre d'eleve dans le groupe
+    */
 	public int getNbPlaces(){
 		return this.nbPlaces;
 	}

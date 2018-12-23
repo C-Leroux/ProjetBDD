@@ -6,8 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-// https://examples.javacodegeeks.com/core-java/sql/jdbc-connection-pool-example/
 public class DbConnexion {
+	
+	// connection a la base de donnee 
     private String url = "jdbc:mysql://localhost:3306/tmp";
     private String utilisateur = "root";
     private String motDePasse = "mysql";
@@ -17,6 +18,14 @@ public class DbConnexion {
     private Statement st = null;
     private ResultSet rs = null;
     
+    /**
+    Constructeur 
+    	Verifie si le driver MySQL est bien present dans le projet. 
+    	Renvoie une exception sinon.
+    @param Requete Requete a executer 
+    @return Instance DbConnexion permettant de traiter la requête passée en parametre.
+    */
+	
 	public DbConnexion(String requete) throws ClassNotFoundException {
 		this.requete = requete;
 		
@@ -30,11 +39,21 @@ public class DbConnexion {
 	        throw e;
 	    } 
 	}
+	
+	/** 
+	Récupère une connexion vers la base de donnees en utilisant le driver JDBC.
+    @return Instance de la connexion vers la base de donnees.
+    */
 
     private Connection getDbConnexion() throws SQLException {
     	return DriverManager.getConnection( this.url, this.utilisateur, this.motDePasse );
     }
 
+    /**
+    Execute la requete passe en parametre du constructeur.
+    @return Resultset Retourne les donnees de la requete a traiter.
+    */
+    
 	public ResultSet executerRequete() throws SQLException {
 		Connection connexion = getDbConnexion();
 		this.st = connexion.createStatement();
@@ -42,13 +61,16 @@ public class DbConnexion {
 		return rs;
 	}
 	
-	//renvoie 0 en cas d'echec de la requete d'insertion, et 1 en cas de succes ;
+   /**
+    Fait la requete
+    @param 
+    @returnrenvoie 0 en cas d'echec de la requete d'insertion, et 1 en cas de succes ;
+    */
 	public int executerInsert() throws SQLException {
 		Connection connexion;
 		try {
 			connexion = getDbConnexion();
 			this.st = connexion.createStatement();
-			System.out.println(this.requete);
 			return this.st.executeUpdate(this.requete);
  
 		} catch (SQLException e1) {
@@ -61,16 +83,10 @@ public class DbConnexion {
 	public ResultSet getResultSet() {
 		return this.rs;
 	}
-	
-/*	public void doSomethingWithRs() throws SQLException {
-		while (rs.next()) {
-		    long matricule = rs.getLong("matricule");
-		    String nom = rs.getString("nom");
-		    String prenom = rs.getString("prenom");
-		    System.out.println(nom + " " + prenom);
-		}
-	}
-*/	
+
+	/**
+	 * Ferme les instances des objets et la connexion permettant d'executer la requete.
+	 */
 	public void fermerConnexion() {
 		try {
 			this.rs.close();

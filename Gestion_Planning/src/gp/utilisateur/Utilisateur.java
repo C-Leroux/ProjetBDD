@@ -35,18 +35,38 @@ public class Utilisateur {
 	
 	Long idGroupe = 0L;
 
-	
+	/**
+    getter matricule
+    @param
+    @return le matricule de l'utilisateur
+    */
 	public Long getMatricule() {
     	return this.matricule;
     }
+	
+	/**
+    getter role
+    @param
+    @return le role de l'utilisateur
+    */
     public String getRole(){
     	return this.role.toString();
     }
     
+    /**
+    getter idGroupe
+    @param
+    @return idgroupe 
+    */
     public Long getIdGroupe() {
     	return this.idGroupe;
     }
     
+    /**
+    supprime l'utilisateur de la base de donnee grace a l'id de l'utilisateur
+    @param matricule 
+    @return int, si l'utilisateur a reussis a etre supprime
+    */
     public int supprimerUtilisateur(Long matricule) {
 		String value = "DELETE FROM UTILISATEUR WHERE matricule = "+ matricule.toString() + ";";
 		int status = 0;
@@ -55,6 +75,11 @@ public class Utilisateur {
     
 	}
     
+   /**
+    selectionne les cours de la semaine de l'utilisateur
+    @param l'id de la semaine
+    @return la liste des cours de la semaine
+    */
     public ArrayList<Cours> getCoursByIdSemaine(int idSemaine) throws SQLException
     {
     	String str = "SELECT * FROM COURS WHERE numSemaine = " + idSemaine
@@ -85,7 +110,6 @@ public class Utilisateur {
 		}
 		return null;
 
-		
     }
 
 }

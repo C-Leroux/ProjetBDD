@@ -19,12 +19,14 @@ import gp.utilisateur.Administrateur;
 import gp.utilisateur.Contact;
 import gp.utilisateur.Eleve;
 import gp.utilisateur.Professeur;
+import interfaceG.FenetreLog;
 
 public class Main {
 	
 	public static void main(String[] args) throws ParseException {
 		try {
 
+			// entre des donnee dans la base de donnee
 	        // creation d'un groupe
 			Groupe groupe1 = Groupe.creerGroupe("TD A", GroupeType.TD, 30 , "L3 NEW 2021");
 			
@@ -181,6 +183,12 @@ public class Main {
 			    String promotion = rs3.getString("promotion");
 			    System.out.println(nom + " " + promotion );
 			}
+			
+			// Ouvre la fenetre pour se connecter
+			
+			//FenetreLog fenetre = new FenetreLog();
+			//AjoutCours fenetre = new AjoutCours();
+			//fenetre.setVisible(true);
 			
 			// fermeture de la base de donnée
 			db.fermerConnexion();

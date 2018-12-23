@@ -47,7 +47,17 @@ public class Cours {
 		this.nbPlaceSalle = getNbPlacesSalle();
 	}
 	
-
+	/**
+    Creer un cours, verifie que le cours correspond aux criteres, l'insere dans la base de donnees,
+    @param nom, le nom du cours
+    @param debut, la date et l'heure de debut de cours
+    @param fin, la date et l'heure de fin de cours
+    @param idSalle, l'identifiant de la salle ou aura lieux le cours
+    @param matricule, le matricule du professeur qui donnera le cours
+    @param idGroupe, l'identifiant du groupe qui aura le cours
+    @param numSemaine, le numero de semaine ou aura lieu le cours
+    @return Cours.
+    */
 	public static Cours creerCours(String nom, Date debut, Date fin, Long idsalle, Long matricule,
 			Long idGroupe, int numSemaine) throws SQLException {
 		Cours cours = new Cours(nom, debut, fin, idsalle, matricule, idGroupe,
@@ -78,6 +88,11 @@ public class Cours {
 		return null;
 	}
 
+	/**
+    supprime le cours en selectionnant l'id du cours
+    @param id, l'identifiant unique des cours
+    @return Cours.
+    */
 	public static int supprimerCours(Long id) {
 		String value = "DELETE FROM COURS WHERE idCours = " + id.toString() + ";";
 		DbConnexion db;
@@ -99,8 +114,11 @@ public class Cours {
 		return this.dateFin;
 	}
 
-	// si le cours existe deja
-	// selectionne le cours avec une date de debut egale
+	/**
+    si le cours existe, selection le cours avec la date et l'id du groupe passer en parametre
+    @param date du cours correspondant, l'id du groupe
+    @return boolean, retourne vrai si l'id du cours existe.
+    */
 	public boolean getCoursbyDateDebut(Date date, Long idGroupe) throws SQLException {
 		java.sql.Date dateSql = new java.sql.Date(date.getTime());
 		
@@ -124,11 +142,21 @@ public class Cours {
 		return false;
 	}
 
+	/**
+    retourn l'identifiant unique de la salle
+    @param 
+    @return id de la salle.
+    */
 	public Long getIdSalle() {
 		return idSalle;
 
 	}
 
+	/**
+    retourn le nombre de place disponible dans la salle
+    @param 
+    @return le nombre de place dans la salle
+    */
 	public int getNbPlacesSalle() throws SQLException {
 		String str = "SELECT nbPlaces FROM SALLE WHERE idSalle = '"
 				+ this.idSalle + "';";
@@ -150,19 +178,40 @@ public class Cours {
 		}
 		return 0;
 	}
-
+	
+	/**
+    getter de l'idGroupe. retourne l'identifiant unique du groupe
+    @param 
+    @return retourne l'identifiant unique du groupe
+    */
 	public Long getIdGroup() {
 		return this.idGroupe;
 	}
 
+	/**
+    getter de l'id du cours. retourne l'identifiant unique du cours
+    @param 
+    @return retourne l'identifiant unique du cours
+    */
 	public Long getId() {
 		return this.id;
 	}
 
+	/**
+    getter du numero de semaine.
+    @param 
+    @return retourne le numero de semaine
+    */
 	public int getNumSemaine() {
 		return this.numSemaine;
 	}
 
+	/**
+    retourne la liste des cours, correspondant au numero de semaine, avec l'idgroupe
+    @param le numero de la semaine, pour selectionner la semaine a afficher
+    @param idgroupe, pour savoir qu'elle groupe selectionner
+    @return retourne la liste des cours
+    */
 	public static ArrayList<Cours> getCoursbyIdSemaine(int idSemaine, Long idGroupe) throws SQLException {
 		String str = "SELECT * FROM COURS WHERE numSemaine = '" + idSemaine
 				+ "' AND idGroupe = '" + idGroupe + "';";
@@ -170,7 +219,6 @@ public class Cours {
 		try {
 			db = new DbConnexion(str);
 			ResultSet resultat = db.executerRequete();
-			// traite la liste de resultat
 			ArrayList<Cours> listCours = new ArrayList<Cours>();
 			  while(resultat.next()){ 
 				  Long id = resultat.getLong("idCours");
@@ -192,6 +240,12 @@ public class Cours {
 		return null;
 	}
 
+	/**
+    retourne la liste des cours, correspondant a la date , avec l'idgroupe
+    @param la date, pour les cours a la date correspondante
+    @param idgroupe, pour savoir qu'elle groupe selectionner
+    @return retourne la liste des cours
+    */
 	public static ArrayList<Cours> getCoursbyIdDate(Date date, Long idGroupe) throws SQLException {
 		java.sql.Date dateSql = new java.sql.Date(date.getTime());
 		
@@ -222,7 +276,11 @@ public class Cours {
 		}
 		return null;
 	}
-	
+	/**
+    getter jour
+    @param 
+    @return retourne le numero de jour
+    */
 	public int getJour() {
 		Calendar calendar = new GregorianCalendar();
 		calendar.setTime(dateDebut);
@@ -246,11 +304,21 @@ public class Cours {
 		}
 	}
 	
+	/**
+    getter heure
+    @param
+    @return String, retourne l'heure d'un cours en string formatter
+    */
 	public String getHeure() {
 		DateFormat df = new SimpleDateFormat("HH:mm");
 		return df.format(dateDebut) + " - " + df.format(dateFin);
 	}
 	
+	/**
+    getter nm du cours
+    @param 
+    @return retourne le nom
+    */
 	public String getNom() {
 		return this.nom;
 	}

@@ -14,7 +14,16 @@ public class Contact implements IContact {
 	private String email = null;
 	private Long matricule = 0L;
 	
-	
+	/**
+    Constructeur de la classe Contact, qui est le responsable de l'eleve
+    @param nom, le nom du contact
+    @param prenom du contact
+    @param adresse du contact
+    @param mdp, de l'utilisateur
+    @param telephone, telephone du contact
+    @param email, l'emial de l'utilisateur
+    @return Contact
+    */
 	public Contact(String nom, String prenom, String adresse, String telephone, String email, Long matricule){
 		this.nom = nom;
 		this.prenom = prenom;
@@ -24,6 +33,16 @@ public class Contact implements IContact {
 		this.matricule = matricule;
 	}
 	
+	/**
+    Creer le responsable en base de donnee de l'utilsateur
+    @param nom, le nom du contact
+    @param prenom du contact
+    @param adresse du contact
+    @param mdp, de l'utilisateur
+    @param telephone, telephone du contact
+    @param email, l'emial de l'utilisateur
+    @return Contact
+    */
 	public static Contact creeContact(String nom, String prenom, String adresse, String telephone, String email, Long matricule) {
 		Contact contact = new Contact(nom, prenom, adresse, telephone, email, matricule);
 		String value = "INSERT INTO RESPONSABLE (nomResp, prenomResp, adresseResp, telResp, emailResp, matricule) VALUES( '" + nom + "','" + prenom + "','" + adresse + "','" + telephone + "','" + email + "','" + matricule + "');";
@@ -47,31 +66,11 @@ public class Contact implements IContact {
 
 	}
 	
-	public void supprimerContact() {
-		
-	}
-	
-	public ArrayList<Contact> getContact(Long matricule) {
-		String str = "SELECT * FROM RESPONSABLE WHERE matricule = " + matricule + ";" ;
-		//ResultSet resultat = statement.executeQuery(str);
-		
-		// traiter le resultat
-		ArrayList<Contact> listContact = new ArrayList<Contact>();
-	    /*while(resultat.next()){
-		  Long id = resultat.getLong();
-		  String nom = resultat.getString();
-		  String prenom = resultat.getString();
-		  String adresse = resultat.getString();
-		  String telephone = resultat.getString();
-		  String email = resultat.getString();
-		  Long matricule = resultat.getLong();
-		  Contact contact = new Contact(id, nom, prenom, adresse, telephone, email, matricule);
-		  listContact.add(contact);
-	}*/
-		return listContact;
-		
-	}
-	
+	/**
+    getter de l'id du responsable
+    @param 
+    @return id du responsable
+    */
 	public Long getId()
 	{
 		return this.id;

@@ -15,8 +15,24 @@ import main.DbConnexion;
 
 public class Eleve extends Utilisateur implements IEleve {
 	
-	//Long idGroupe = 0L;
-	//private ArrayList<Contact> contacts = new ArrayList<Contact>();
+	/**
+    Constructeur de la classe Eleve
+    @param nom, le nom de l'utilisateur
+    @param prenom de l'utilisateur
+    @param login, de l'utilisateur
+    @param mdp, de l'utilisateur
+    @param role, role de l'utilisateur
+    @param dateNaissance, la date de naissance
+    @param villeNaissance, la ville de naissance
+    @param paysNaissance, le pays de naissance
+    @param sexe, le sexe de l'utilisateur
+    @param inscription date, la date d'inscription de l'eleve
+    @param numMaison , le numero de telephone maison
+    @param numMobile, le numero de téléphone mobile
+    @param email, l'emial de l'utilisateur
+    @param idgroupe, l'id du groupe de l'eleve
+    @return eleve
+    */
 	
     public Eleve(String nom, String prenom, String login, Date dateNaissance, String paysNaissance, String etablissementPrecedent
     		, Date inscriptionDate, char sex, String villeNaissance, String numMaison, String numMobile, String photo, Long idGroupe,
@@ -39,7 +55,16 @@ public class Eleve extends Utilisateur implements IEleve {
     	this.photo = photo;
     	this.idGroupe = idGroupe;
     }
-	
+    
+    /**
+    Constructeur de la classe Eleve
+    @param login, de l'utilisateur
+    @param mdp, de l'utilisateur
+    @param role, role de l'utilisateur
+    @param email, l'emial de l'utilisateur
+    @param idGroupe, idgroupe de l'eleve
+    @return eleve
+    */
 	public Eleve(Long matricule, String login, String mdp, Long idGroupe) {
 		this.login = login;
     	this.mdp = mdp;
@@ -47,7 +72,24 @@ public class Eleve extends Utilisateur implements IEleve {
     	this.idGroupe = idGroupe;
     	this.matricule = matricule;
 	}
-
+	
+	/**
+    Creer l'eleve et insert l'eleve dans la base de donnee
+    @param nom, le nom de l'utilisateur
+    @param prenom de l'utilisateur
+    @param login, de l'utilisateur
+    @param mdp, de l'utilisateur
+    @param role, role de l'utilisateur
+    @param dateNaissance, la date de naissance
+    @param villeNaissance, la ville de naissance
+    @param paysNaissance, le pays de naissance
+    @param sexe, le sexe de l'utilisateur
+    @param inscription date, la date d'inscription de l'eleve
+    @param numMaison , le numero de telephone maison
+    @param numMobile, le numero de téléphone mobile
+    @param email, l'emial de l'utilisateur
+    @return eleve
+    */
 	public static Eleve creerEleve(String nom, String prenom, String login, Date dateNaissance, String paysNaissance, String etablissementPrecedent
     		, Date inscriptionDate, char sex, String villeNaissance, String numMaison, String numMobile, String photo, Long idGroupe, String mdp, String email) throws ClassNotFoundException {
 		Eleve eleve = new Eleve(nom, prenom, login, dateNaissance, paysNaissance, etablissementPrecedent
@@ -77,60 +119,13 @@ public class Eleve extends Utilisateur implements IEleve {
 	}
 	
 	
-	
-	public void getEleve() {
-/*		Connection connexion = null;
-		try {
-			connexion = MySqlProvider.getInstance().getConnexion();
-			String query = "SELECT * FROM users";
-			// create the java statement
-			Statement st = connexion.createStatement();
-			// execute the query, and get a java resultset
-			ResultSet rs = st.executeQuery(query);
-		      
-			// iterate through the java resultset
-			while (rs.next()) {
-			    long matricule = rs.getLong("matricule");
-			    String nom = rs.getString("nom");
-			    String prenom = rs.getString("prenom");
-			    System.out.println(nom + " " + prenom);
-			}
-			st.close();
-
-		} catch (SQLException e) {
-			System.out.println("Erreur de connexion a la base de donn�e nooob. " + e.getMessage());
-	    } finally {
-			if (connexion != null) {
-	            try {
-	                connexion.close();
-	            } catch (SQLException ignore) {
-	            }				
-			}
-	    }*/
-	}
-	
+	/**
+    Constructeur de la classe Eleve
+    @param 
+    @return idgroupe de l'eleve
+    */
 	public Long getGroupbyEleve(){
 		return this.idGroupe; 
 	}
-	
-	/*public ArrayList<Cours> getCoursByIdSemaine(int idSemaine)
-    {
-    	String str = "SELECT * FROM COURS WHERE numSemaine = " + idSemaine
-				+ " AND idGroupe = " + this.idGroupe + ";";
-		// ResultSet resultat = statement.executeQuery(str);
-
-		// traiter la liste de r�sultat
-		ArrayList<Cours> listCours = new ArrayList<Cours>();
-		/*
-		 * while(resultat.next()){ Long id = resultat.getLong(); Date debut =
-		 * resultat.getDate(); Date fin = resultat.getDate(); Long idSalle =
-		 * resultat.getLong(); Long matricule = resultat.getLong(); Long
-		 * idGroupe = resultat.getLong(); int numSemaine = resultat.getString();
-		 * Cours cours = new Cours(id, debut, fin, idSalle, matricule, idGroupe,
-		 * numSemaine); listContact.add(contact); }
-		 */
-		//return listCours;
-    //}
-	
 	
 }

@@ -6,6 +6,22 @@ import main.DbConnexion;
 
 public class Administrateur extends Utilisateur implements IAdministrateur {
 	
+	/**
+    Constructeur de la classe Administrateur
+    @param nom, le nom de l'utilisateur
+    @param prenom de l'utilisateur
+    @param login, de l'utilisateur
+    @param mdp, de l'utilisateur
+    @param role, role de l'utilisateur
+    @param numMaison , le numero de telephone maison
+    @param numMobile, le numero de téléphone mobile
+    @param email, l'emial de l'utilisateur
+    @param rue, la rue de l'adresse
+    @param codePostal, le code postale de l'adresse
+    @param ville, la ville de l'adresse de l'utilisateur
+    @return Administrateur
+    */
+	
 	public Administrateur (String nom, String prenom, String login
     		, String numMaison, String numMobile, String mdp, String email, String rue, String codePostal, String ville)
     {
@@ -22,6 +38,16 @@ public class Administrateur extends Utilisateur implements IAdministrateur {
     	this.ville = ville;
     }
 	
+	/**
+    Constructeur de la classe Administrateur
+    @param nom, le nom de l'utilisateur
+    @param prenom de l'utilisateur
+    @param login, de l'utilisateur
+    @param mdp, de l'utilisateur
+    @param matricule, l'identifiant unique del'utilisateur
+    @return Administrateur
+    */
+	
 	public Administrateur(Long matricule, String login, String mdp) {
 		this.login = login;
     	this.mdp = mdp;
@@ -29,6 +55,21 @@ public class Administrateur extends Utilisateur implements IAdministrateur {
     	this.matricule = matricule;
 	}
 	
+	/**
+    Creer l'administrateur dans la base de donnee, et le construit 
+    @param nom, le nom de l'utilisateur
+    @param prenom de l'utilisateur
+    @param login, de l'utilisateur
+    @param mdp, de l'utilisateur
+    @param role, role de l'utilisateur
+    @param numMaison , le numero de telephone maison
+    @param numMobile, le numero de téléphone mobile
+    @param email, l'emial de l'utilisateur
+    @param rue, la rue de l'adresse
+    @param codePostal, le code postale de l'adresse
+    @param ville, la ville de l'adresse de l'utilisateur
+    @return Administrateur
+    */
 	public static Administrateur creerAdministrateur(String nom, String prenom, String login
     		, String numMaison, String numMobile, String mdp, String email, String rue, String codePostal, String ville) {
 		Administrateur admin = new Administrateur(nom, prenom, login, numMaison, numMobile, mdp, email, rue, codePostal, ville);
