@@ -25,6 +25,17 @@ public class Cours {
 	private int nbPlaceSalle = 0;
 	private int numSemaine = 0;
 
+	/**
+    Constructeur de la classe Cours
+    @param nom, le nom du cours
+    @param debut, la date et l'heure de debut de cours
+    @param fin, la date et l'heure de fin de cours
+    @param idSalle, l'identifiant de la salle ou aura lieux le cours
+    @param matricule, le matricule du professeur qui donnera le cours
+    @param idGroupe, l'identifiant du groupe qui aura le cours
+    @param numSemaine, le numero de semaine ou aura lieu le cours
+    @return Cours.
+    */
 	public Cours(String nom, Date debut, Date fin, Long idsalle, Long matricule,
 			Long idGroupe, int numSemaine) throws SQLException {
 		this.nom = nom;
@@ -35,6 +46,7 @@ public class Cours {
 		this.idGroupe = idGroupe;
 		this.nbPlaceSalle = getNbPlacesSalle();
 	}
+	
 
 	public static Cours creerCours(String nom, Date debut, Date fin, Long idsalle, Long matricule,
 			Long idGroupe, int numSemaine) throws SQLException {

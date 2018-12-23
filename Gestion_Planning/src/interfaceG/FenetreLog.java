@@ -32,7 +32,6 @@ public class FenetreLog extends JFrame {
 		 
 	public FenetreLog () {
 		super ();
-		
 		build ();
 	}
 	
@@ -90,7 +89,7 @@ public class FenetreLog extends JFrame {
                         if (user != null) {
                             setVisible(false);
                             dispose();
-                            FenetrePlanning planning = new FenetrePlanning(user);
+                            Fenetre2 planning = new Fenetre2(user);
                             planning.setVisible(true);
    
                         } else {
@@ -149,7 +148,7 @@ public class FenetreLog extends JFrame {
 			e.printStackTrace();
 		}
 		return null;
-
-		
 	}
 }
+
+

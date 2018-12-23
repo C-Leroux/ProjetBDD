@@ -182,7 +182,6 @@ public class Main {
 			    System.out.println(nom + " " + promotion );
 			}
 			
-			
 			// fermeture de la base de donnée
 			db.fermerConnexion();
 			

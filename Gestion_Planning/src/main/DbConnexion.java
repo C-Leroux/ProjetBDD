@@ -38,8 +38,7 @@ public class DbConnexion {
 	public ResultSet executerRequete() throws SQLException {
 		Connection connexion = getDbConnexion();
 		this.st = connexion.createStatement();
-		this.rs = st.executeQuery(requete);
-		
+		this.rs = st.executeQuery(requete);		
 		return rs;
 	}
 	
