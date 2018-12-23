@@ -38,7 +38,8 @@ public class FenetreLog extends JFrame {
 	
 	private void build () {
 		// gestion fenetre 
-		setTitle("Gestion Planning"); //On donne un titre a l'application
+		setTitle("Connexion"); //On donne un titre a l'application
+
 		 setSize(320,240); //On donne une taille a notre fenetre
 		 setLocationRelativeTo(null); //On centre la fenetre sur l'ecran
 		 setResizable(false); //On interdit la redimensionnement de la fenetre
