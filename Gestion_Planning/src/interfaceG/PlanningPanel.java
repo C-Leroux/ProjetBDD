@@ -61,8 +61,7 @@ public class PlanningPanel extends JPanel {
 		Calendar calendar = new GregorianCalendar();
 		ArrayList<Cours> cours;
 		try {
-			//calendar.getWeekYear()
-			cours = this.utilisateur.getCoursByIdSemaine(1);
+			cours = this.utilisateur.getCoursByIdSemaine(calendar.getWeeksInWeekYear());
 			for (Cours c : cours)
 				ajoutCours(c);
 		} catch (SQLException e) {

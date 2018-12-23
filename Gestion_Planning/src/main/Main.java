@@ -86,7 +86,7 @@ public class Main {
 			 
 			java.sql.Timestamp lundi4 = new java.sql.Timestamp(date22.getTime());
 			
-			Cours cours = Cours.creerCours("algorithmique", lundi2, lundi4, 1L , 1L, 1L, 1);
+			Cours cours = Cours.creerCours("algorithmique", lundi2, lundi4, 1L , 1L, 1L, calendar.getWeeksInWeekYear());
 			
 			
 			// Creation du cours 2
@@ -113,7 +113,7 @@ public class Main {
 			 
 			lundi4 = new java.sql.Timestamp(date22.getTime());
 			
-			Cours cours1 = Cours.creerCours("theorie des graph", lundi2, lundi4, 1L , 1L, 1L, 1);
+			Cours cours1 = Cours.creerCours("theorie des graph", lundi2, lundi4, 1L , 1L, 1L, calendar.getWeeksInWeekYear());
 
 			
 			// creation administrateur
@@ -189,9 +189,8 @@ public class Main {
 			
 			// Ouvre la fenetre pour se connecter
 			
-			//FenetreLog fenetre = new FenetreLog();
-			//AjoutCours fenetre = new AjoutCours();
-			//fenetre.setVisible(true);
+			FenetreLog fenetre = new FenetreLog();
+			fenetre.setVisible(true);
 			
 			// fermeture de la base de donnée
 			db3.fermerConnexion();

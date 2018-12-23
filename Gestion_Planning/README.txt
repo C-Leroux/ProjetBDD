@@ -33,3 +33,4 @@ Etape 4:
 
 - cliquer sur le Main.java dans le package main
 - cliquer sur run pour lancer l'interface graphique
+- la creation des eleves, des cours, des groupes, des salles, des professeurs, des administrateurs est deja faite

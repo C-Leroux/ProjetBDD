@@ -32,6 +32,7 @@ public class FenetreLog extends JFrame {
 		 
 	public FenetreLog () {
 		super ();
+		
 		build ();
 	}
 	
@@ -45,16 +46,16 @@ public class FenetreLog extends JFrame {
 		 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //On dit a l'application de se fermer lors du clic sur la croix
 		 
 		 this.setContentPane(buildContentPane());
-		 this.setVisible(true);
-		 // gestion barre de menu
+		 this.setVisible(true);      // on rend visible la fenêtre
+		 
 
 	}
 	
 	private JPanel buildContentPane(){
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(4,1));
+		panel.setLayout(new GridLayout(4,1));   // création du panel principal
 		
-		JPanel pan1 = new JPanel();
+		JPanel pan1 = new JPanel();             // création de 4 sous-panels positionnés en colonne
 		pan1.setLayout(new FlowLayout());
 		JPanel pan2 = new JPanel();
 		pan2.setLayout(new FlowLayout());
@@ -64,17 +65,18 @@ public class FenetreLog extends JFrame {
 		pan4.setLayout (new FlowLayout());
 		
 		
-		JLabel lbl = new JLabel ("EFREI");
+		JLabel lbl = new JLabel ("EFREI");              // création de trois label "titre"
 		JLabel lblLogin = new JLabel ("Login");
 		JLabel lblMdp = new JLabel ("Mot de passe");
 		
-		JTextField txtLogin = new JTextField (25);
-		//JTextField txtMdp = new JTextField (25);
+		JTextField txtLogin = new JTextField (25);      // création de deux champs d'entrés login et mot de passe
+
 		JPasswordField txtMdp = new JPasswordField(25);
 		
-		JButton btnCo = new JButton("Connexion");
+		JButton btnCo = new JButton("Connexion");                      // bouton de connexion
 		btnCo.addActionListener(new java.awt.event.ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {    
+                    // performance du bouton : validation de l'authentification et ouverture de la fenêtre2
                         String mdp = String.valueOf(txtMdp.getPassword());
                         String username = txtLogin.getText();
                         
@@ -97,7 +99,7 @@ public class FenetreLog extends JFrame {
                         }
                     }
                 });
-		pan1.add(lbl);
+		pan1.add(lbl);         
 		pan2.add(lblLogin);
 		pan2.add(txtLogin);
 		pan3.add(lblMdp);
@@ -150,5 +152,7 @@ public class FenetreLog extends JFrame {
 		return null;
 	}
 }
+
+
 
 
