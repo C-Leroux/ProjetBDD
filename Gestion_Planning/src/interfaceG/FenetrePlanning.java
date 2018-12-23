@@ -23,9 +23,12 @@ import gp.utilisateur.Utilisateur;
 
 public class FenetrePlanning extends JFrame {
 	
+	Utilisateur user;
+	
 	public FenetrePlanning(Utilisateur user)
 	{
 		super();
+		this.user = user;
 		build();
 	}
 	
@@ -45,7 +48,7 @@ public class FenetrePlanning extends JFrame {
 		panel.setLayout(new GridBagLayout());
 		panel.setBackground(Color.white);*/
 
-	    PlanningPanel panel = new PlanningPanel(new Utilisateur());
+	    PlanningPanel panel = new PlanningPanel(user);
 		
 		return panel;
 	}
